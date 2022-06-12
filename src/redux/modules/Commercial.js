@@ -4,8 +4,12 @@ const CommercialSlice = createSlice({
     name : 'commercial',  
     initialState : [],
     reducers:{
-        
+        addCommercial:  (state,action) => { 
+            const megazine = {...action.payload}
+            state = [...state, megazine]
 
+        },
+        
 
 
 
@@ -50,6 +54,6 @@ const CommercialSlice = createSlice({
 }
 })
 
-export const {} = CommercialSlice.actions;
+export const { addCommercial } = CommercialSlice.actions;
 
 export default CommercialSlice;

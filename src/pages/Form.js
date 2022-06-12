@@ -19,6 +19,7 @@ const Form = ({ mode, addPost, updatePost, data }) => {
         category: selected,
         score: rating,
         file: fileInput,
+        filename : fileName,
     }
 
 
