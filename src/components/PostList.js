@@ -7,12 +7,22 @@ import { postApi } from '../shared/api';
 import { loadCommercial } from '../redux/modules/Commercial';
 import { useDispatch, useSelector } from 'react-redux';
 
-const PostList = () => {
+const PostList = (props) => {
+  const [star, setStar] = React.useState([0, 1, 2, 3, 4]);
+  const [category, setCategory] = React.useState([
+    '컴퓨터',
+    '노트북',
+    '웨어러블',
+    '가전제품',
+    '기타',
+  ]);
+
   const dispatch = useDispatch();
 
+  // 리덕스에 데이터 보내기
   const posts = async () => {
     const post_list = await postApi.loadPost();
-    console.log(post_list.data);
+    // console.log(post_list.data);
 
     dispatch(loadCommercial(post_list.data));
   };
@@ -21,40 +31,53 @@ const PostList = () => {
     posts();
   }, []);
 
-  const data = useSelector((state) => state);
-  console.log(data.commercial);
+  // 리덕스 데이터 들고오기
+  const data = useSelector((state) => state.commercial);
+
+  // 탭 버튼 클릭에 따른 데이터
+  const tabContent = data.filter((x) => {
+    if (x.category == props.activeIndex) {
+      return x.category;
+    }
+    if (props.activeIndex === 0) {
+      return x;
+    }
+  });
 
   return (
     <Container>
-      <Post>
-        <Top>
-          <h4>닉네임</h4>
-          <p>2022/02/09</p>
-        </Top>
-        <Picture />
-        <Contents>
-          <h4>제품명이 들어갑니다.</h4>
-          <p>내용이 들어갑니다.</p>
-        </Contents>
-        <Bottom style={{ marginTop: '10px' }}>
-          <div
-            style={{
-              backgroundColor: 'red',
-              padding: '3px',
-              borderRadius: '5px',
-            }}
-          >
-            카테고리명
-          </div>
-          <div>
-            <StarIcon />
-            <StarIcon />
-            <StarIcon />
-            <StarIcon />
-            <StarIcon />
-          </div>
-        </Bottom>
-      </Post>
+      {tabContent.map((list, idx) => {
+        return (
+          <Post key={idx}>
+            <Top>
+              <h4>{list.member}</h4>
+              <p>2022/02/09</p>
+            </Top>
+            {list.img && <Picture style={{ backgroundImage: `url(${list.img})` }} />}
+
+            <Contents>
+              <h4>{list.device}</h4>
+              <p>{list.content}</p>
+            </Contents>
+            <Bottom style={{ marginTop: '10px' }}>
+              <div
+                style={{
+                  backgroundColor: 'red',
+                  padding: '3px',
+                  borderRadius: '5px',
+                }}
+              >
+                {category[list.category - 1]}
+              </div>
+              <div>
+                {star.map((star, idx) => {
+                  return <StarIcon style={{ color: list.score > idx ? '#ffe596' : '#eee' }} />;
+                })}
+              </div>
+            </Bottom>
+          </Post>
+        );
+      })}
     </Container>
   );
 };
@@ -100,9 +123,10 @@ const Picture = styled.div`
   width: 100%;
   height: 300px;
 
-  // background-color: #7ceba0;
+  background-color: #eee;
 
-  background-image: url('https://firebasestorage.googleapis.com/v0/b/sparta-megazine.appspot.com/o/images%2FvJs3tlUkPSQvipVB4YeItYrnhTS2_1654739445381?alt=media&token=8a7daa41-8ace-4893-ad86-888b31fa2ed3');
+  // background-image: url('https://firebasestorage.googleapis.com/v0/b/sparta-megazine.appspot.com/o/images%2FvJs3tlUkPSQvipVB4YeItYrnhTS2_1654739445381?alt=media&token=8a7daa41-8ace-4893-ad86-888b31fa2ed3');
+
   background-position: center;
   background-size: cover;
 `;
