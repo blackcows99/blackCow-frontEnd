@@ -8,44 +8,39 @@ const Main = () => {
   const navigate = useNavigate();
   return (
       // 박승현님 부분
-    <div>
-      <button
-        onClick={() => {
-          navigate('/update');
-        }}
-      >
-        update
-      </button>
-      <button
-        onClick={() => {
-          navigate('/detail');
-        }}
-      >
-        detail
-      </button>
-      <WriteBtn onClick={() => { navigate('/add') }} >
-        <CreateIcon/>
-      </WriteBtn>
-    </div>
+    // <div>
+    //   <button
+    //     onClick={() => {
+    //       navigate('/update');
+    //     }}
+    //   >
+    //     update
+    //   </button>
+    //   <button
+    //     onClick={() => {
+    //       navigate('/detail');
+    //     }}
+    //   >
+    //     detail
+    //   </button>
+    //   <WriteBtn onClick={() => { navigate('/add') }} >
+    //     <CreateIcon/>
+    //   </WriteBtn>
+    // </div>
 
     // 오누리님 부분
-    // <Container>
-    //   <Banner>배너 이미지 들어가유~</Banner>
-    //   <TabMenu>
-    //     <button>All</button>
-    //     <button>컴퓨터</button>
-    //     <button>노트북</button>
-    //     <button>웨어러블</button>
-    //     <button>가전제품</button>
-    //     <button>기타</button>
-    //   </TabMenu>
-    //   <div>
-    //     <PostList />
-    //   </div>
-    //   <WriteBtn>
-    //     <CreateIcon />
-    //   </WriteBtn>
-    // </Container>
+    <Container>
+      <Banner>배너 이미지 들어가유~</Banner>
+      <TabMenu>
+        {tabArr.map((section, idx) => {
+          return section.tabTitle;
+        })}
+      </TabMenu>
+      <div>{tabArr[activeIndex].tabContent}</div>
+      <WriteBtn>
+        <CreateIcon />
+      </WriteBtn>
+    </Container>
   );
 };
 
