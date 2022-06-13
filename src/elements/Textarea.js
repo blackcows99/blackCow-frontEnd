@@ -11,17 +11,18 @@ const Textarea = (props) => {
     } = props;
     const styles = {
         label,
-        type,
-        placeholder,
-        value,
-        _onChange,
         margin,
         width,
     }
     return (
         <div>
-             <TextArea {...styles}
+             <TextArea 
+             {...styles}
+                type={type}
+                defaultValue={value}
+                placeholder={placeholder}
                 onChange={_onChange}
+                style={{width}}
              ></TextArea>
         </div>
     )

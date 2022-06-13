@@ -1,14 +1,14 @@
 import styled from "styled-components";
-const Select = ( {_onChange} ) => {
+const Select = ( { _onChange,value } ) => {
     
 
     return (
-        <SelectBox onChange={_onChange} >
+        <SelectBox onChange={_onChange} defaultValue={value}>
             <option value="1" >컴퓨터</option>   {/* value 값이 서버로 넘어감 */}
             <option value="2" >노트북</option>
             <option value="3" >웨어러블</option>
             <option value="4" >가전제품</option>
-            <option value="5" defaultValue >기타</option>
+            <option value="5" >기타</option>
         </SelectBox>
     )
 }

@@ -3,28 +3,98 @@ import { Input, Title, Select, Textarea, Image, MyContainer, CustomButton } from
 import { Score } from '../components';
 import styled from 'styled-components';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { postApi } from '../shared/api';
+import { updateCommercial } from '../redux/modules/Commercial';
+import { addCommercial } from "../redux/modules/Commercial";
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { storage } from '../shared/firebase';
+import { useDispatch } from 'react-redux';
 
 
-
-const Form = ({ mode, addPost, updatePost, data }) => {
+const Form = ({ mode }) => {
+    const dispatch = useDispatch();
     const fileInput = useRef();
     const [fileName, setFileName] = useState("");
-    const [rating, setRating] = useState(1);
+    const [fileImage, setFileImage] = useState("");
+    const [rating, setRating] = useState("");
     const [selected, setSelected] = useState("");
     const [inputText, setInputText] = useState("");
     const [areaText, setAreaText] = useState("");
-    const [fileImage, setFileImage] = useState("");
+    const [commercial, setCommercial] = useState(null);
 
-    const _data = {
-        device: inputText,
-        contents: areaText,
-        category: selected,
-        score: rating,
-        file: fileInput,
-        filename : fileName,
+    
+    const addPost = async () => {
+        const file = fileInput.current.files[0];  // 복잡한 파일 담겨있음 변환 필요
+        if (!(inputText && areaText &&
+            selected && rating &&file)) {
+          alert("모든 항목을 다 입력해주세요.");
+          return;
+        }
+        
+        const data = {
+            device: inputText,
+            contents: areaText,
+            category: selected,
+            score: rating,
+        }
+
+        const uploaded_file = await uploadBytes(
+            ref(storage, `images/${file.name}`),// 파일이름
+            file                                   //  파일
+        );
+        // ref로 다운로드url에 씀
+        const file_url = await getDownloadURL(uploaded_file.ref);
+
+        const real_data = {
+            device: data.device,
+            contents: data.contents,
+            category: data.category,
+            score: data.score,
+            img: file_url,
+        }
+        console.log(real_data)
+        // postApi.addPost(real_data);                // 서버에 보내기
+        // dispatch(addCommercial(real_data));        // 리덕스에 보내기
+    };
+
+    const updatePost = async () => {
+        const data = {
+            device: inputText ? inputText : commercial?.device,
+            contents: areaText ? areaText : commercial?.contents,
+            category: selected ? selected : commercial?.category,
+            score: rating ? rating : commercial?.score,
+        }
+        let file_url;
+        if (fileInput.current.files[0]) {
+            const file = fileInput.current.files[0];             // 복잡한 파일 담겨있음 변환 필요
+            const uploaded_file = await uploadBytes(
+                ref(storage, `images/${file.name}`),// 파일이름
+                file                                    //  파일
+            );                                          // ref로 다운로드url에 씀
+            file_url = await getDownloadURL(uploaded_file.ref);
+        }
+
+        const real_data = {
+            device: data.device,
+            contents: data.contents,
+            category: data.category,
+            score: data.score,
+            img: file_url? file_url : commercial.img,
+        }
+        console.log(real_data)
+        // postApi.updatePost(real_data);                // 서버에 보내기
+        // dispatch(updateCommercial(real_data));  
+    };
+
+    const call = async () => {
+        const data = await postApi.loadOnePost(1);
+        setCommercial(data)
     }
-    console.log(data)
+    console.log(commercial)
 
+    React.useEffect(() => {
+        if (mode === "update") call();
+    }, [])
 
 
     const selectFile = (e) => {
@@ -46,17 +116,17 @@ const Form = ({ mode, addPost, updatePost, data }) => {
         <MyContainer width="60vw">
             <Title text="이미지를 선택해주세요."></Title>
             <div>
-                <div style={{display :"flex", alignItems:"center"}}>
-                <Input
-                    placeholder="파일을 선택해주세요."
-                    value={fileName}
-                    disabled
-                    width="50%"
-                />
+                <div style={{ display: "flex", alignItems: "center" }}>
+                    <Input
+                        placeholder="파일을 선택해주세요."
+                        value={fileName || ""}
+                        disabled
+                        width="50%"
+                    />
 
-                <CustomButton>
-                    <label htmlFor="file" style={{ cursor:"pointer"}}>파일 찾기</label>
-                </CustomButton>
+                    <CustomButton>
+                        <label htmlFor="file" style={{ cursor: "pointer" }}>파일 찾기</label>
+                    </CustomButton>
                 </div>
                 <input
                     id="file"
@@ -66,34 +136,39 @@ const Form = ({ mode, addPost, updatePost, data }) => {
                     onChange={selectFile}
                 />
 
-                <Image src={ mode === "add" ? 
-                ( fileImage ? fileImage : null) 
-                : data.img} >
+                <Image src={mode === "add" ?
+                    (fileImage ? fileImage : null)
+                    : (fileImage ? fileImage : commercial?.img)}>
                 </Image>
                 <Title text="평점을 선택해주세요."></Title>
-                <Score score={data?.score} _onClick={ onClickScore } />
+                <Score
+                    // score={ commercial?.score } 
+                    _onClick={onClickScore} />
             </div>
-            <Title text="내용을 입력해주세요." ></Title><br />
+            <Title text="내용을 입력해주세요"></Title><br />
             <Input
                 placeholder="제품명을 입력해주세요."
-                value={data?.device}
                 width="50%"
+                value={mode === "add" ? "" : commercial?.device}
                 _onChange={(e) => { setInputText(e.target.value) }}
             />
-            <Select _onChange={ onChangeSelect } ></Select>
+            <Select
+                _onChange={onChangeSelect}
+                value={commercial?.category}>
+            </Select>
             <Textarea
                 placeholder="내용을 입력해주세요."
-                value={data?.content}
+                value={mode === "add" ? "" : commercial?.contents}
                 _onChange={(e) => { setAreaText(e.target.value) }}
             />
-            { mode === "add" ?
+            {mode === "add" ?
                 <CustomButton style={{ padding: "10px", width: "100%" }}
-                    _onClick={()=>{ addPost(_data)} }
+                    _onClick={() => { addPost() }}
                 >작성하기
                 </CustomButton>
                 : <CustomButton
                     style={{ padding: "10px", width: "100%" }}
-                    _onClick={()=>{updatePost(_data)}}
+                    _onClick={() => { updatePost() }}
                 >수정하기
                 </CustomButton>
             }
