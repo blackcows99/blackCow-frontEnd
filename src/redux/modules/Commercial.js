@@ -11,12 +11,12 @@ const CommercialSlice = createSlice({
     },
 
     updateCommercial: (state, action) => {
-      console.log(action.payload);
+    //   console.log(action.payload);
     }, // 여기 할차례
 
     loadCommercial: (state, action) => {
       state.push(...action.payload);
-      console.log(current(state));
+    //   console.log(current(state));
     },
 
     // loadMegazine:  (state,action) => {

@@ -3,7 +3,9 @@ import styled from 'styled-components';
 import { MyContainer, Image } from '../elements';
 import { TabContent } from '../components';
 import { BsStarFill } from 'react-icons/bs';
+import { useParams } from 'react-router-dom';
 const Detail = ({ data }) => {
+    const params = useParams();
     return (
         <MyContainer width="60vw">
             <TitleBox>
