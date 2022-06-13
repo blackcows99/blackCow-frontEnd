@@ -1,8 +1,29 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import StarIcon from '@mui/icons-material/Star';
+import axios from 'axios';
+import { async } from '@firebase/util';
+import { postApi } from '../shared/api';
+import { loadCommercial } from '../redux/modules/Commercial';
+import { useDispatch, useSelector } from 'react-redux';
 
 const PostList = () => {
+  const dispatch = useDispatch();
+
+  const posts = async () => {
+    const post_list = await postApi.loadPost();
+    console.log(post_list.data);
+
+    dispatch(loadCommercial(post_list.data));
+  };
+
+  useEffect(() => {
+    posts();
+  }, []);
+
+  const data = useSelector((state) => state);
+  console.log(data.commercial);
+
   return (
     <Container>
       <Post>
