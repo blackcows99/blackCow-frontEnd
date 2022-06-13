@@ -16,7 +16,7 @@ const authApi = {
 const postApi = {
   loadPost: async () => {
     return await axios
-      .get('/api_posts')
+      .get('http://localhost:5001/api_posts')
       .then((response) => {
         console.log('완료!');
         console.log(response);
@@ -74,7 +74,6 @@ const postApi = {
       });
   },
 
- 
   updatePost: async (id, data) => {
     return await axios
       .patch(`http://localhost:5001/api_post/` + id, data)
