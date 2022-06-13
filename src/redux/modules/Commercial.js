@@ -5,11 +5,14 @@ const CommercialSlice = createSlice({
     initialState : [],
     reducers:{
         addCommercial:  (state,action) => { 
-            const megazine = {...action.payload}
-            state = [...state, megazine]
-
+            const commercial = {...action.payload}
+            state.push(commercial)
+            // console.log(current(state))
         },
         
+        updateCommercial: ( state, action ) => {
+            console.log(action.payload);
+        }, // 여기 할차례 
 
 
 
@@ -54,6 +57,6 @@ const CommercialSlice = createSlice({
 }
 })
 
-export const { addCommercial } = CommercialSlice.actions;
+export const { addCommercial,updateCommercial } = CommercialSlice.actions;
 
 export default CommercialSlice;

@@ -2,7 +2,6 @@ import RESP from "./response"
 import { storage } from '../shared/firebase';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import axios from "axios";
-
 const authApi = {
     signup: data => {
         // instance.post("/api/signup")
@@ -33,21 +32,26 @@ const postApi = {
             img: file_url,
         }
 
-
-        // await axios.get("http://localhost:5001/api_posts")
-        // .then(res => {
-        //     console.log(res)
-        // });
-
-        // 서버와 통신
-        await axios.post("http://localhost:5001/api_post",real_data)
-        .then( res => {
-            alert("등록 완료!")
-        })
-        .catch( error => {
-            alert("에러 발생!")
-        })
-    }
+        await axios.post("http://localhost:5001/api_post", real_data)
+            .then(res => {
+                alert("등록 완료!")
+            })
+            .catch(error => {
+                alert("에러 발생!")
+            })
+    },
+    loadOnePost: async (id) => {
+        return (
+            await axios.get(`http://localhost:5001/api_post/${id}`)
+                .then(res => {
+                    alert("로드 완료!")
+                    return res;
+                })
+                .catch(error => {
+                    alert("로드 에러 발생!")
+                })
+        )
+    },
 }
 
 
