@@ -8,6 +8,7 @@ const Main = () => {
   const navigate = useNavigate();
 
   // 탭 메뉴 구현 부분
+  // 다시 올림쓰
   const [activeIndex, setActiveIndex] = React.useState(0);
   const tabArr = [
     {
