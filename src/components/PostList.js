@@ -22,7 +22,7 @@ const PostList = (props) => {
   // 리덕스에 데이터 보내기
   const posts = async () => {
     const post_list = await postApi.loadPost();
-    // console.log(post_list.data);
+    console.log(post_list.data);
 
     dispatch(loadCommercial(post_list.data));
   };

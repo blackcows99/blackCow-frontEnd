@@ -16,7 +16,7 @@ const authApi = {
 const postApi = {
   loadPost: async () => {
     return await axios
-      .get('api_post')
+      .get('/api_posts')
       .then((response) => {
         console.log('완료!');
         console.log(response);
@@ -74,9 +74,9 @@ const postApi = {
       });
   },
 
-  updatePost: async (id,data) => {
+  updatePost: async (id, data) => {
     return await axios
-      .patch(`http://localhost:5001/api_post/`+id,data)
+      .patch(`http://localhost:5001/api_post/` + id, data)
       .then((res) => {
         alert('업데이트 완료!');
         return res.data;
@@ -85,7 +85,6 @@ const postApi = {
         alert('업데이트 에러 발생!');
       });
   },
-
 };
 
 export { authApi, postApi };

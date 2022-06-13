@@ -70,17 +70,8 @@ const Main = () => {
         {tabArr.map((section, idx) => {
           return section.tabTitle;
         })}
-        {/* <button>All</button>
-        <button>컴퓨터</button>
-        <button>노트북</button>
-        <button>웨어러블</button>
-        <button>가전제품</button>
-        <button>기타</button> */}
       </TabMenu>
-      <div>
-        {/* <PostList /> */}
-        {tabArr[activeIndex].tabContent}
-      </div>
+      <div>{tabArr[activeIndex].tabContent}</div>
       <WriteBtn>
         <CreateIcon />
       </WriteBtn>
