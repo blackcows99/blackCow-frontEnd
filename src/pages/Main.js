@@ -72,7 +72,7 @@ const Main = () => {
         })}
       </TabMenu>
       <div>{tabArr[activeIndex].tabContent}</div>
-      <WriteBtn>
+      <WriteBtn onClick={()=>{navigate('/add')}}>
         <CreateIcon />
       </WriteBtn>
     </Container>

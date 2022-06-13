@@ -6,9 +6,11 @@ import { async } from '@firebase/util';
 import { postApi } from '../shared/api';
 import { loadCommercial } from '../redux/modules/Commercial';
 import { useDispatch, useSelector } from 'react-redux';
-
+import { useNavigate } from 'react-router-dom';
 const PostList = (props) => {
+  const navigate = useNavigate();
   const [star, setStar] = React.useState([0, 1, 2, 3, 4]);
+
   const [category, setCategory] = React.useState([
     '컴퓨터',
     '노트북',
@@ -53,7 +55,7 @@ const PostList = (props) => {
               <h4>{list.member}</h4>
               <p>2022/02/09</p>
             </Top>
-            {list.img && <Picture style={{ backgroundImage: `url(${list.img})` }} />}
+            {list.img && <Picture onClick={()=>{navigate(`/detail/${list.id}`)}} style={{ backgroundImage: `url(${list.img})` }} />}
 
             <Contents>
               <h4>{list.device}</h4>
