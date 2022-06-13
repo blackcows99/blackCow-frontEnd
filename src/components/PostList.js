@@ -53,9 +53,16 @@ const PostList = (props) => {
           <Post key={idx}>
             <Top>
               <h4>{list.member}</h4>
-              <p>2022/02/09</p>
+              <p>{list.date}</p>
             </Top>
-            {list.img && <Picture onClick={()=>{navigate(`/detail/${list.id}`)}} style={{ backgroundImage: `url(${list.img})` }} />}
+            {list.img && (
+              <Picture
+                onClick={() => {
+                  navigate(`/detail/${list.id}`);
+                }}
+                style={{ backgroundImage: `url(${list.img})` }}
+              />
+            )}
 
             <Contents>
               <h4>{list.device}</h4>

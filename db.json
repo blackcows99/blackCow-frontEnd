@@ -184,7 +184,8 @@
       "img": "http://ui.ssgcdn.com/cmpt/banner/202103/2021032509540448772796294379_265.jpg",
       "device": "device1",
       "category": "1",
-      "score": "1"
+      "score": "1",
+      "date": "2022-12-22"
     },
     {
       "id": 1,
@@ -193,7 +194,8 @@
       "img": "http://ui.ssgcdn.com/cmpt/banner/202103/2021032509540448772796294379_265.jpg",
       "device": "device2",
       "category": "2",
-      "score": "2"
+      "score": "2",
+      "date": "2022-12-02"
     },
     {
       "id": 2,
@@ -202,7 +204,8 @@
       "img": "http://ui.ssgcdn.com/cmpt/banner/202103/2021032509540448772796294379_265.jpg",
       "device": "device3",
       "category": "3",
-      "score": "3"
+      "score": "3",
+      "date": "2022-12-03"
     },
     {
       "id": 3,
@@ -211,7 +214,8 @@
       "img": "http://ui.ssgcdn.com/cmpt/banner/202103/2021032509540448772796294379_265.jpg",
       "device": "device4",
       "category": "4",
-      "score": "4"
+      "score": "4",
+      "date": "2022-12-15"
     },
     {
       "id": 4,
@@ -220,7 +224,8 @@
       "img": "http://ui.ssgcdn.com/cmpt/banner/202103/2021032509540448772796294379_265.jpg",
       "device": "device1",
       "category": "5",
-      "score": "5"
+      "score": "5",
+      "date": "2022-12-18"
     },
     {
       "id": 5,
@@ -229,7 +234,8 @@
       "img": "http://ui.ssgcdn.com/cmpt/banner/202103/2021032509540448772796294379_265.jpg",
       "device": "device3",
       "category": "4",
-      "score": "3"
+      "score": "3",
+      "date": "2022-12-09"
     }
   ]
 }
