@@ -42,9 +42,8 @@ const Main = () => {
   };
 
   return (
-    //   박승현님 부분
+    // 박승현님 부분
     // <div>
-
     //   <button
     //     onClick={() => {
     //       navigate('/update');

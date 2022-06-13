@@ -74,12 +74,12 @@ const postApi = {
       });
   },
 
+ 
   updatePost: async (id, data) => {
     return await axios
       .patch(`http://localhost:5001/api_post/` + id, data)
       .then((res) => {
         alert('업데이트 완료!');
-        return res.data;
       })
       .catch((error) => {
         alert('업데이트 에러 발생!');
