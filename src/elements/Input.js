@@ -1,5 +1,5 @@
 import styled from "styled-components";
-
+import { useRef } from "react";
 const Input = (props) => {
     const {
         label,
@@ -17,14 +17,16 @@ const Input = (props) => {
         width,
     }
 
+    
+
     return (
             <InputBox 
             // {...styles}
-             type={type}
-             value={value}
-             placeholder={placeholder}
-             onChange={_onChange}
-             style={{width}}
+                type={type}
+                defaultValue={value}
+                placeholder={placeholder}
+                onChange={_onChange}
+                style={{width}}
             ></InputBox>
     )
 }

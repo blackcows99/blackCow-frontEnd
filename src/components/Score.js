@@ -4,7 +4,7 @@ import { BsStarFill } from 'react-icons/bs';
 const Score = ({score, _onClick}) => {
     const [hovered, setHovered] = useState(null);
     const [clicked, setClicked] = useState(null);
-
+    const [mode, setMode] = useState(false);
     const goToFetch = e => {
         setClicked(e.target.id);
         fetch(`http://10.58.3.24:8000/products/1`, {
@@ -24,10 +24,12 @@ const Score = ({score, _onClick}) => {
     return (
         <ReviewBox>
             <StarContainer>
+                
                 {[1, 2, 3, 4, 5].map(el => (
+                    
                     <BsStarFill style={{
                         fontSize: "40px",
-                        color: `${((clicked >= el) | (hovered >= el)) ? 'yellow' : '#dfdfdf'}`
+                        color: ((clicked >= el) | (hovered >= el)) ? 'yellow' : '#dfdfdf'
                     }}
                         key={el}
                         onMouseEnter={() => setHovered(el)}
