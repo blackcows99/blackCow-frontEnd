@@ -47,9 +47,9 @@ const Header = () => {
       <h1>Black Cow</h1>
       <div>
         <p>000님, 안녕하세요!</p>
-        <button>로그인</button>
-        <button>회원가입</button>
-        <button>로그아웃</button>
+        <button onClick={signIn}>로그인</button>
+        <button onClick={signUp}>회원가입</button>
+        <button onClick={signOut}>로그아웃</button>
       </div>
     </Container>
   );

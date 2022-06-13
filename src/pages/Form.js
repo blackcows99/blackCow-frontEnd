@@ -9,10 +9,12 @@ import { addCommercial } from "../redux/modules/Commercial";
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { storage } from '../shared/firebase';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 
 const Form = ({ mode }) => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const fileInput = useRef();
     const [fileName, setFileName] = useState("");
     const [fileImage, setFileImage] = useState("");
@@ -53,7 +55,9 @@ const Form = ({ mode }) => {
             img: file_url,
         }
         console.log(real_data)
-        postApi.addPost(real_data);                // 서버에 보내기
+        postApi.addPost(real_data);
+        navigate(-1);
+                       // 서버에 보내기
         // dispatch(addCommercial(real_data));        // 리덕스에 보내기
     };
 
@@ -83,6 +87,7 @@ const Form = ({ mode }) => {
         }
         console.log(real_data)
         postApi.updatePost(commercial.id,real_data);                // 서버에 보내기
+        navigate("/");
         // dispatch(updateCommercial(real_data));  
     };
 
@@ -163,12 +168,12 @@ const Form = ({ mode }) => {
             />
             {mode === "add" ?
                 <CustomButton style={{ padding: "10px", width: "100%" }}
-                    _onClick={() => { addPost() }}
+                    _onClick={() => { addPost();  }}
                 >작성하기
                 </CustomButton>
                 : <CustomButton
                     style={{ padding: "10px", width: "100%" }}
-                    _onClick={() => { updatePost() }}
+                    _onClick={() => { updatePost(); }}
                 >수정하기
                 </CustomButton>
             }

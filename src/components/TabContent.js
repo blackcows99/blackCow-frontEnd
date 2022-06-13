@@ -1,40 +1,64 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import styled from "styled-components";
 import { Input, CustomButton } from '../elements';
-
-const TabContent = () => {
-    const [fade,setFade] = useState('');
+import { postApi } from '../shared/api';
+const TabContent = ({ data, postId }) => {
+    const [fade, setFade] = useState('');
     const [tab, setTab] = useState(false);
-    React.useEffect(()=>{
-        const a = setTimeout(()=>{setFade('end')},10)
-        return () => { setFade(''); clearTimeout(a)}
-    },[tab])
+    const [comments, setComments] = useState(data);
+    const [inputText, setInputText] = useState("");
+    React.useEffect(() => {
+        const a = setTimeout(() => { setFade('end') }, 10)
+        return () => { setFade(''); clearTimeout(a) }
+    }, [tab])
     const clickTab = () => {
         setTab(!tab);
     }
+    console.log(data)
+
+    const handleComment = async () => {
+        const _data = {
+            comment: inputText,
+        }
+        console.log(postId)
+        const response = await postApi.addComment(postId, _data)
+        console.log(response);
+    }
+
+    React.useEffect(()=>{
+        
+    },[])
+
     return (
         <div className={`start ${fade}`}>
             <Span onClick={clickTab}>댓글</Span>
-            <Line/>
-            {tab ? 
-            <>
-                <Input
-                    placeholder="댓글을 입력하세요."
-                    width="60%"
-                    _onChange={(e) => {
-                        // setId(e.target.value);
-                    }}
-                />
-                <CustomButton width="15%">등록</CustomButton>
-                <div style={{
-                    display:"flex",
-                    padding:"10px",}}>
-                    <strong style={{flexGrow:"1"}}>닉네임</strong>
-                    <div style={{flexGrow:"2",textAlign:"center"}}>콘텐츠ddddddddddddddddd</div>
-                    <Line/>
-                </div>
-            </>
-            : null}
+            <Line />
+            {tab ?
+                <>
+                    <Input
+                        placeholder="댓글을 입력하세요."
+                        width="60%"
+                        _onChange={(e) => {  setInputText(e.target.value) }}
+                    />
+                    <CustomButton _onClick={ handleComment } width="15%">등록</CustomButton>
+
+                    {data.map((d, i) => {
+                        return (
+                        <div
+                            key={i}
+                            style={{
+                                display: "flex",
+                                padding: "10px",
+                            }}>
+                            <strong style={{ flexGrow: "1" }}>{d.member}</strong>
+                            <div style={{ flexGrow: "2", textAlign: "center" }}>{d.comment}</div>
+                            <Line />
+                        </div>)
+
+                    })}
+
+                </>
+                : null}
         </div>
     )
 }

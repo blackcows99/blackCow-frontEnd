@@ -13,7 +13,7 @@ const Update = () => {
     const data = {};
     return (
         <div>
-            <Form mode="update"  />
+            <Form mode="update"/>
         </div>
     );
 }

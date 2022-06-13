@@ -1,41 +1,69 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import { MyContainer, Image } from '../elements';
+import { MyContainer, Image, CustomButton } from '../elements';
 import { TabContent } from '../components';
 import { BsStarFill } from 'react-icons/bs';
-import { useParams } from 'react-router-dom';
+import { Navigate, useNavigate, useParams } from 'react-router-dom';
+import { postApi } from '../shared/api';
 const Detail = ({ data }) => {
     const params = useParams();
+    const navigate = useNavigate();
+    const id = params.id;
+    const [commercial, setCommercial] = useState(null);
+    const [category, setTCategory] = useState("");
+
+
+    const call = async () => {
+        const data = await postApi.loadOnePost(id);
+        setCommercial(data)
+    }
+    React.useEffect(() => {
+        call();
+    }, [])
+
     return (
-        <MyContainer width="60vw">
-            <TitleBox>
-                <strong>닉네임</strong>
-                <div>시간</div>
-            </TitleBox>
-            <ContentBox>
-                <Image src={data?.img_url} width="50%"></Image>
-                <div style={{ padding: "10px" }}>
-                    <p><strong style={{ fontSize: "1.1rem" }}>제품명 : 어쩌구</strong></p>
-                    <p>게시글 내용</p>
-                </div>
-            </ContentBox>
-            <Center>
-                <div>
-                    <Category>카테고리명</Category>
-                    {[1, 2, 3, 4, 5].map(el => (
-                        <BsStarFill
-                            key={el}
-                            style={{
-                                fontSize: "30px",
-                                color: `${el <= data?.score ? "yellow" : "#dfdfdf"}`
-                            }}
-                        />
-                    ))}
-                </div>
-            </Center>
-            <TabContent/>
-            <SideMenu>상세 페이지</SideMenu>
-        </MyContainer>
+        <>  <div style={{ margin:"70px auto 0 auto"}}>
+            <CustomButton width="10vw" _onClick={() => { navigate(`/update/${commercial?.id}`) }} >수정하기</CustomButton>
+            <CustomButton width="10vw"_onClick={() => { navigate(-1) }}>뒤로가기</CustomButton>
+            </div>
+            <MyContainer width="60vw">
+
+                <TitleBox>
+                    <strong>{commercial?.member}</strong>
+
+                    <div>{commercial?.date}</div>
+
+                </TitleBox>
+                <ContentBox>
+                    <Image src={commercial?.img} width="50%"></Image>
+                    <div style={{ padding: "10px" }}>
+                        <p><strong style={{ fontSize: "1.1rem" }}>{commercial?.device}</strong></p>
+                        <p>{commercial?.comtents}</p>
+                    </div>
+                </ContentBox>
+                <Center>
+                    <div>
+                        <Category>{commercial?.category === "1" ? "컴퓨터"
+                            : (commercial?.category === "2" ? "노트북"
+                                : (commercial?.category === "3" ? "웨어러블"
+                                    : (commercial?.category === "4" ? "가전제품"
+                                        : (commercial?.category === "5" ? "기타" : ""))))
+                        }</Category>
+                        {[1, 2, 3, 4, 5].map(el => (
+                            <BsStarFill
+                                key={el}
+                                style={{
+                                    fontSize: "30px",
+                                    color: `${commercial?.score >= el ? "yellow" : "#dfdfdf"}`
+                                }}
+                            />
+                        ))}
+                    </div>
+                </Center>
+                <TabContent data={commercial?.comments} postId={id} />
+                <SideMenu>상세 페이지</SideMenu>
+            </MyContainer>
+        </>
     )
 }
 
