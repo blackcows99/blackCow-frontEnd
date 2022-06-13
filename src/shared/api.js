@@ -16,7 +16,7 @@ const authApi = {
 const postApi = {
   loadPost: async () => {
     return await axios
-      .get('http://localhost:5001/api_posts')
+      .get('api_post')
       .then((response) => {
         console.log('완료!');
         console.log(response);
