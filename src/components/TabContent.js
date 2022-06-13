@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import styled from "styled-components";
 import { Input, CustomButton } from '../elements';
 import { postApi } from '../shared/api';
-const TabContent = ({ data, postId }) => {
+const TabContent = ({ data,onClick,content,setContent }) => {
     const [fade, setFade] = useState('');
     const [tab, setTab] = useState(false);
-    const [comments, setComments] = useState(data);
+    // const [comments, setComments] = useState(data);
     const [inputText, setInputText] = useState("");
     React.useEffect(() => {
         const a = setTimeout(() => { setFade('end') }, 10)
@@ -14,19 +14,11 @@ const TabContent = ({ data, postId }) => {
     const clickTab = () => {
         setTab(!tab);
     }
-    console.log(data)
+    // console.log(data)
 
-    const handleComment = async () => {
-        const _data = {
-            comment: inputText,
-        }
-        console.log(postId)
-        const response = await postApi.addComment(postId, _data)
-        console.log(response);
-    }
+
 
     React.useEffect(()=>{
-        
     },[])
 
     return (
@@ -38,9 +30,10 @@ const TabContent = ({ data, postId }) => {
                     <Input
                         placeholder="댓글을 입력하세요."
                         width="60%"
-                        _onChange={(e) => {  setInputText(e.target.value) }}
+                        _onChange={setContent}
+                        value={content}
                     />
-                    <CustomButton _onClick={ handleComment } width="15%">등록</CustomButton>
+                    <CustomButton _onClick={ onClick } width="15%">등록</CustomButton>
 
                     {data.map((d, i) => {
                         return (

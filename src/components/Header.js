@@ -4,9 +4,10 @@ import { FaHome } from 'react-icons/fa';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-
+import axios from "axios";
 const Header = () => {
   const navigate = useNavigate();
+  const [member,setMemeber] = React.useState({});
   const signIn = () => {
     navigate('/login');
   };
@@ -16,6 +17,18 @@ const Header = () => {
   const signUp = () => {
     navigate('/sign_up');
   };
+  const getMemberInfo = () =>{
+      axios.get('/api_member')
+          .then((response)=>{
+            setMemeber(response.data);
+          }).catch((error)=>{
+              console.log(error);
+            setMemeber({});
+      });
+  }
+  React.useEffect(()=>{
+      getMemberInfo();
+  },[])
   return (
     // <Container>
     //   <FaHome
@@ -46,10 +59,10 @@ const Header = () => {
     <Container>
       <h1>Black Cow</h1>
       <div>
-        <p>000님, 안녕하세요!</p>
-        <button onClick={signIn}>로그인</button>
-        <button onClick={signUp}>회원가입</button>
-        <button onClick={signOut}>로그아웃</button>
+        <p>{member.name==undefined?'':member.name+'님, 안녕하세요!'}</p>
+        <button onClick={signIn} style={{display:member.name==undefined?'':'none'}}>로그인</button>
+        <button onClick={signUp} style={{display:member.name==undefined?'':'none'}}>회원가입</button>
+        <button onClick={signOut} style={{display:member.name!=undefined?'':'none'}}>로그아웃</button>
       </div>
     </Container>
   );

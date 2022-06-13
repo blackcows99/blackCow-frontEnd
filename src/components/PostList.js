@@ -58,7 +58,9 @@ const PostList = (props) => {
             {list.img && (
               <Picture
                 onClick={() => {
-                  navigate(`/detail/${list.id}`);
+                  navigate(`/detail/${list.id}`,{
+                    id:list.id
+                  });
                 }}
                 style={{ backgroundImage: `url(${list.img})` }}
               />

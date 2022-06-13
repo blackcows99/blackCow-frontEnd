@@ -10,12 +10,26 @@ const Detail = ({ data }) => {
     const navigate = useNavigate();
     const id = params.id;
     const [commercial, setCommercial] = useState(null);
-    const [category, setTCategory] = useState("");
-
+    const [comments, setComments] = useState([]);
+    const [content,setContent] = useState('');
 
     const call = async () => {
         const data = await postApi.loadOnePost(id);
-        setCommercial(data)
+        let commentdata = data.comments;
+        setCommercial(data);
+        setComments(commentdata);
+    }
+
+    const handleComment = async () => {
+        const _data = {
+            comment: content,
+        }
+        const response = await postApi.addComment(id, _data)
+        console.log(response);
+        setContent('');
+        call();
+
+
     }
     React.useEffect(() => {
         call();
@@ -43,11 +57,11 @@ const Detail = ({ data }) => {
                 </ContentBox>
                 <Center>
                     <div>
-                        <Category>{commercial?.category === "1" ? "컴퓨터"
-                            : (commercial?.category === "2" ? "노트북"
-                                : (commercial?.category === "3" ? "웨어러블"
-                                    : (commercial?.category === "4" ? "가전제품"
-                                        : (commercial?.category === "5" ? "기타" : ""))))
+                        <Category>{commercial?.category === 1 ? "컴퓨터"
+                            : (commercial?.category === 2 ? "노트북"
+                                : (commercial?.category === 3 ? "웨어러블"
+                                    : (commercial?.category === 4 ? "가전제품"
+                                        : (commercial?.category === 5 ? "기타" : ""))))
                         }</Category>
                         {[1, 2, 3, 4, 5].map(el => (
                             <BsStarFill
@@ -60,7 +74,7 @@ const Detail = ({ data }) => {
                         ))}
                     </div>
                 </Center>
-                <TabContent data={commercial?.comments} postId={id} />
+                <TabContent data={comments} postId={id} content={content} setContent={(e)=>setContent(e.target.value)} onClick={()=>handleComment()}  />
                 <SideMenu>상세 페이지</SideMenu>
             </MyContainer>
         </>

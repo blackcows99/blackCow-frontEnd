@@ -16,7 +16,7 @@ const authApi = {
 const postApi = {
     loadPost: async () => {
         return await axios
-            .get('http://localhost:5001/api_posts')
+            .get('/api_posts')
             .then((response) => {
                 console.log('완료!');
                 console.log(response);
@@ -31,23 +31,23 @@ const postApi = {
         // RESP.COMMERCIALS.push({});
         // const file = data.file; // 복잡한 파일 담겨있음 변환 필요
 
-        // const uploaded_file = await uploadBytes(
+        // const uploaded/file = await uploadBytes(
         //     ref(storage, `images/${data.filename}`), // 파일이름
         //     file //  파일
         // ); // ref로 다운로드url에 씀
 
-        // const file_url = await getDownloadURL(uploaded_file.ref);
+        // const file/url = await getDownloadURL(uploaded/file.ref);
 
-        // const real_data = {
+        // const real/data = {
         //     device: data.device,
         //     contents: data.contents,
         //     category: data.category,
         //     score: data.score,
-        //     img: file_url,
+        //     img: file/url,
         // };
 
         await axios
-            .post('http://localhost:5001/api_post', data)
+            .post('/api_post', data)
             .then((res) => {
                 alert('등록 완료!');
             })
@@ -58,7 +58,7 @@ const postApi = {
 
     loadOnePost: async (id) => {
         return await axios
-            .get(`http://localhost:5001/api_post/${id}`)
+            .get(`/api_post/${id}`)
             .then((res) => {
                 return res.data;
             })
@@ -70,7 +70,7 @@ const postApi = {
 
     updatePost: async (id, data) => {
         return await axios
-            .patch(`http://localhost:5001/api_post/` + id, data)
+            .patch(`/api_post/` + id, data)
             .then((res) => {
                 alert('업데이트 완료!');
             })
@@ -81,7 +81,7 @@ const postApi = {
     addComment: async (id, data) => {
         console.log(id, data)
         return await axios
-            .post(`http://localhost:5001/api_comment/${id}`, data)
+            .post(`/api_comment/${id}`, data)
             .then((res) => {
                 alert('코멘트 등록 완료!');
             })
