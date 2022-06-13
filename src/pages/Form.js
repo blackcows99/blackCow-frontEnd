@@ -53,7 +53,7 @@ const Form = ({ mode }) => {
             img: file_url,
         }
         console.log(real_data)
-        // postApi.addPost(real_data);                // 서버에 보내기
+        postApi.addPost(real_data);                // 서버에 보내기
         // dispatch(addCommercial(real_data));        // 리덕스에 보내기
     };
 
@@ -82,7 +82,7 @@ const Form = ({ mode }) => {
             img: file_url? file_url : commercial.img,
         }
         console.log(real_data)
-        // postApi.updatePost(real_data);                // 서버에 보내기
+        postApi.updatePost(commercial.id,real_data);                // 서버에 보내기
         // dispatch(updateCommercial(real_data));  
     };
 

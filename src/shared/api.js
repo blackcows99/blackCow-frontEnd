@@ -74,9 +74,9 @@ const postApi = {
       });
   },
 
-  updatePost: async (id) => {
+  updatePost: async (id,data) => {
     return await axios
-      .get(`http://localhost:5001/api_post/${id}`)
+      .patch(`http://localhost:5001/api_post/`+id,data)
       .then((res) => {
         alert('업데이트 완료!');
         return res.data;
