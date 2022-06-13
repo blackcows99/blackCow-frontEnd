@@ -1,0 +1,19 @@
+.isActive {
+  width: 120px;
+  height: 100%;
+
+  background-color: transparent;
+  border: none;
+  border-bottom: 2px solid red;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.isBtn {
+  width: 120px;
+  height: 100%;
+
+  background-color: transparent;
+  border: none;
+  font-size: 15px;
+}

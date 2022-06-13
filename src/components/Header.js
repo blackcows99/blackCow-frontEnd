@@ -76,6 +76,7 @@ const Container = styled.div`
   background-color: #eee;
   width: 100%;
   height: 70px;
+  z-index: 1;
 
   box-sizing: border-box;
   padding: 0px 15px;
@@ -90,7 +91,9 @@ const Container = styled.div`
   & div {
     display: flex;
     align-items: center;
-    vertical-align: text-bottom;
+    justify-content: center;
+
+    vertical-align: center;
   }
 
   & div > button {

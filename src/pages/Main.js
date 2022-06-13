@@ -1,4 +1,5 @@
 import React from 'react';
+import '../tabBtn.css';
 import styled from 'styled-components';
 import PostList from '../components/PostList';
 import CreateIcon from '@mui/icons-material/Create';
@@ -12,27 +13,69 @@ const Main = () => {
   const [activeIndex, setActiveIndex] = React.useState(0);
   const tabArr = [
     {
-      tabTitle: <button onClick={() => tabClickHandler(0)}>All</button>,
+      tabTitle: (
+        <button
+          className={`${activeIndex === 0 ? 'isActive' : 'isBtn'}`}
+          onClick={() => tabClickHandler(0)}
+        >
+          All
+        </button>
+      ),
       tabContent: <PostList activeIndex={activeIndex} />,
     },
     {
-      tabTitle: <button onClick={() => tabClickHandler(1)}>컴퓨터</button>,
+      tabTitle: (
+        <button
+          className={`${activeIndex === 1 ? 'isActive' : 'isBtn'}`}
+          onClick={() => tabClickHandler(1)}
+        >
+          컴퓨터
+        </button>
+      ),
       tabContent: <PostList activeIndex={activeIndex} />,
     },
     {
-      tabTitle: <button onClick={() => tabClickHandler(2)}>노트북</button>,
+      tabTitle: (
+        <button
+          className={`${activeIndex === 2 ? 'isActive' : 'isBtn'}`}
+          onClick={() => tabClickHandler(2)}
+        >
+          노트북
+        </button>
+      ),
       tabContent: <PostList activeIndex={activeIndex} />,
     },
     {
-      tabTitle: <button onClick={() => tabClickHandler(3)}>웨어러블</button>,
+      tabTitle: (
+        <button
+          className={`${activeIndex === 3 ? 'isActive' : 'isBtn'}`}
+          onClick={() => tabClickHandler(3)}
+        >
+          웨어러블
+        </button>
+      ),
       tabContent: <PostList activeIndex={activeIndex} />,
     },
     {
-      tabTitle: <button onClick={() => tabClickHandler(4)}>가전제품</button>,
+      tabTitle: (
+        <button
+          className={`${activeIndex === 4 ? 'isActive' : 'isBtn'}`}
+          onClick={() => tabClickHandler(4)}
+        >
+          가전제품
+        </button>
+      ),
       tabContent: <PostList activeIndex={activeIndex} />,
     },
     {
-      tabTitle: <button onClick={() => tabClickHandler(5)}>기타</button>,
+      tabTitle: (
+        <button
+          className={`${activeIndex === 5 ? 'isActive' : 'isBtn'}`}
+          onClick={() => tabClickHandler(5)}
+        >
+          기타
+        </button>
+      ),
       tabContent: <PostList activeIndex={activeIndex} />,
     },
   ];
@@ -72,7 +115,11 @@ const Main = () => {
         })}
       </TabMenu>
       <div>{tabArr[activeIndex].tabContent}</div>
-      <WriteBtn onClick={()=>{navigate('/add')}}>
+      <WriteBtn
+        onClick={() => {
+          navigate('/add');
+        }}
+      >
         <CreateIcon />
       </WriteBtn>
     </Container>
@@ -99,24 +146,9 @@ const TabMenu = styled.div`
   align-items: center;
   justify-content: center;
 
-  & button {
-    width: 120px;
-    height: 100%;
-
-    background-color: transparent;
-    border: none;
-
-    font-size: 15px;
-  }
-
   & button:hover {
     cursor: pointer;
     background-color: #fafafa;
-  }
-
-  & button:focus {
-    border-bottom: 2px solid red;
-    font-weight: bold;
   }
 `;
 
