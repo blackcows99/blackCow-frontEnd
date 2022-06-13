@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
+
 const Form = ({ mode, addPost, updatePost, data }) => {
     const fileInput = useRef();
     const [fileName, setFileName] = useState("");
@@ -12,6 +13,7 @@ const Form = ({ mode, addPost, updatePost, data }) => {
     const [selected, setSelected] = useState("");
     const [inputText, setInputText] = useState("");
     const [areaText, setAreaText] = useState("");
+    const [fileImage, setFileImage] = useState("");
 
     const _data = {
         device: inputText,
@@ -21,36 +23,13 @@ const Form = ({ mode, addPost, updatePost, data }) => {
         file: fileInput,
         filename : fileName,
     }
+    console.log(data)
 
 
 
-    const selectFile =  (e) => {
-        // const reader = new FileReader();
-        setFileName(e.target.value.split("\\")[2]);
-
-        
-
-        // const megazine = {
-        //     content: contentRef.current.value,
-        //     nick : props.nick,
-        //     time : nowTime,
-        //     img_url : file_url,
-        //     liked: 0,
-        //     position : x,
-        //     id: docRef.id,
-        //     email: auth.currentUser.email,
-        // } 
-        // dispatch(saveMegazine(megazine));
-        // navigate('/');
-        // // 파일 내용을 읽어옵니다.
-        // reader.readAsDataURL(file);
-
-        // // 읽기가 끝나면 발생하는 이벤트 핸들러예요! :)
-        // reader.onloadend = () => {
-        //     // reader.result는 파일의 컨텐츠(내용물)입니다!
-        //     //   dispatch(imageActions.setPreview(reader.result));
-        //     console.log(reader.result)
-        // };
+    const selectFile = (e) => {
+        setFileName(e.target.value.split("\\")[2]);   // 파일 name 뽑기
+        setFileImage(URL.createObjectURL(fileInput.current.files[0]))  // 이미지 미리보기
     };
 
     const onClickScore = (score) => {
@@ -87,7 +66,10 @@ const Form = ({ mode, addPost, updatePost, data }) => {
                     onChange={selectFile}
                 />
 
-                <Image src={data?.img_url} ></Image>
+                <Image src={ mode === "add" ? 
+                ( fileImage ? fileImage : null) 
+                : data.img} >
+                </Image>
                 <Title text="평점을 선택해주세요."></Title>
                 <Score score={data?.score} _onClick={ onClickScore } />
             </div>

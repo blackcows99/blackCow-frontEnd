@@ -1,11 +1,30 @@
 {
-  "api_post": {
-    "device": "device1",
-    "content": "content1",
-    "category": "category1",
-    "score": "score1",
-    "img": "www.img.com"
-  },
+  "api_post": [
+    {
+      "id": "1",
+      "device": "id가 1인 데이터",
+      "contents": "ㄹㅇ",
+      "category": "5",
+      "score": 4,
+      "img": "https://firebasestorage.googleapis.com/v0/b/week-6-blackcow.appspot.com/o/images%2Fundefined?alt=media&token=32c3876a-1931-45cc-aefa-b8a6f413fb66"
+    },
+    {
+      "id": "2",
+      "device": "id가 2인 데이터",
+      "contents": "ㄹㅇ",
+      "category": "5",
+      "score": 4,
+      "img": "https://firebasestorage.googleapis.com/v0/b/week-6-blackcow.appspot.com/o/images%2Fundefined?alt=media&token=32c3876a-1931-45cc-aefa-b8a6f413fb66"
+    },
+    {
+      "device": "ㅕㅎ",
+      "contents": "ㅗㅛ",
+      "category": "3",
+      "score": 3,
+      "img": "https://firebasestorage.googleapis.com/v0/b/week-6-blackcow.appspot.com/o/images%2Fundefined?alt=media&token=8a319881-1ee4-4c3a-b9cd-817ecf5da1fb",
+      "id": "Bd1EiFB"
+    }
+  ],
   "api_posts": [
     {
       "id": 0,

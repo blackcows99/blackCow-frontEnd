@@ -1,14 +1,18 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { current } from '@reduxjs/toolkit';
-
 const CommercialSlice = createSlice({
   name: 'commercial',
   initialState: [],
   reducers: {
     addCommercial: (state, action) => {
-      const megazine = { ...action.payload };
-      state = [...state, megazine];
+      const commercial = { ...action.payload };
+      state.push(commercial);
+      // console.log(current(state))
     },
+
+    updateCommercial: (state, action) => {
+      console.log(action.payload);
+    }, // 여기 할차례
 
     loadCommercial: (state, action) => {
       state.push(...action.payload);
@@ -51,7 +55,6 @@ const CommercialSlice = createSlice({
     // },
   },
 });
-
-export const { addCommercial, loadCommercial } = CommercialSlice.actions;
+export const { addCommercial, updateCommercial, loadCommercial } = CommercialSlice.actions;
 
 export default CommercialSlice;

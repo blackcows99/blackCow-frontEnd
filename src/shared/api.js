@@ -61,6 +61,18 @@ const postApi = {
         alert('에러 발생!');
       });
   },
+
+  loadOnePost: async (id) => {
+    return await axios
+      .get(`http://localhost:5001/api_post/${id}`)
+      .then((res) => {
+        alert('로드 완료!');
+        return res;
+      })
+      .catch((error) => {
+        alert('로드 에러 발생!');
+      });
+  },
 };
 
 export { authApi, postApi };
