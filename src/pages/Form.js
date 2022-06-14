@@ -8,13 +8,15 @@ import { updateCommercial } from '../redux/modules/Commercial';
 import { addCommercial } from "../redux/modules/Commercial";
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { storage } from '../shared/firebase';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 
 const Form = ({ mode }) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const user = useSelector(state => state.user);
+
     const fileInput = useRef();
     const [fileName, setFileName] = useState("");
     const [fileImage, setFileImage] = useState("");
@@ -23,79 +25,116 @@ const Form = ({ mode }) => {
     const [inputText, setInputText] = useState("");
     const [areaText, setAreaText] = useState("");
     const [commercial, setCommercial] = useState(null);
+    const [_data, setData] = useState("");
 
-    
-    const addPost = async () => {
-        const file = fileInput.current.files[0];  // 복잡한 파일 담겨있음 변환 필요
-        if (!(inputText && areaText &&
-            selected && rating &&file)) {
-          alert("모든 항목을 다 입력해주세요.");
-          return;
-        }
-        
-        const data = {
-            device: inputText,
-            contents: areaText,
-            category: selected,
-            score: rating,
-        }
 
-        const uploaded_file = await uploadBytes(
-            ref(storage, `images/${file.name}`),// 파일이름
-            file                                   //  파일
-        );
-        // ref로 다운로드url에 씀
-        const file_url = await getDownloadURL(uploaded_file.ref);
-
-        const real_data = {
-            device: data.device,
-            contents: data.contents,
-            category: data.category,
-            score: data.score,
-            img: file_url,
-        }
-        console.log(real_data)
-        postApi.addPost(real_data);
-        navigate(-1);
-                       // 서버에 보내기
-        // dispatch(addCommercial(real_data));        // 리덕스에 보내기
-    };
-
-    const updatePost = async () => {
-        const data = {
-            device: inputText ? inputText : commercial?.device,
-            contents: areaText ? areaText : commercial?.contents,
-            category: selected ? selected : commercial?.category,
-            score: rating ? rating : commercial?.score,
-        }
-        let file_url;
-        if (fileInput.current.files[0]) {
+    const getData = async () => {
+        let data;
+        if ( fileInput.current.files[0] ) {
             const file = fileInput.current.files[0];             // 복잡한 파일 담겨있음 변환 필요
             const uploaded_file = await uploadBytes(
                 ref(storage, `images/${file.name}`),// 파일이름
                 file                                    //  파일
             );                                          // ref로 다운로드url에 씀
-            file_url = await getDownloadURL(uploaded_file.ref);
+            const file_url = await getDownloadURL(uploaded_file.ref);
+            data = {
+                device: inputText ? inputText : commercial?.device,
+                contents: areaText ? areaText : commercial?.contents,
+                category: selected ? selected : commercial?.category,
+                score: rating ? rating : commercial?.score,
+                img: file_url ? file_url : commercial?.img,
+                member: user[0].name,
+            }
         }
+        return data;
+    }
 
-        const real_data = {
-            device: data.device,
-            contents: data.contents,
-            category: data.category,
-            score: data.score,
-            img: file_url? file_url : commercial.img,
-        }
-        console.log(real_data)
-        postApi.updatePost(commercial.id,real_data);                // 서버에 보내기
-        navigate("/");
+    
+    const addClick = () => {
+        getData().then(res => {
+            postApi.addPost(res)
+            dispatch(addCommercial(_data)); 
+            navigate(-1);
+        });
+    }
+      const updateClick = () => {
+        const data = getData();
+        console.log('updatePost 실행')
+        console.log(data)
+        // postApi.updatePost(commercial.id,data);                // 서버에 보내기
         // dispatch(updateCommercial(real_data));  
-    };
+
+        // navigate("/");
+    }
+
+    // const addPost = async () => {
+    //     const file = fileInput.current.files[0];  // 복잡한 파일 담겨있음 변환 필요
+    //     if (!(inputText && areaText &&
+    //         selected && rating &&file)) {
+    //       alert("모든 항목을 다 입력해주세요.");
+    //       return;
+    //     }
+
+    //     const data = {
+    //         device: inputText,
+    //         contents: areaText,
+    //         category: selected,
+    //         score: rating,
+    //     }
+
+    //     const uploaded_file = await uploadBytes(
+    //         ref(storage, `images/${file.name}`),// 파일이름
+    //         file                                   //  파일
+    //     );
+    //     // ref로 다운로드url에 씀
+    //     const file_url = await getDownloadURL(uploaded_file.ref);
+
+    //     const real_data = {
+    //         device: data.device,
+    //         contents: data.contents,
+    //         category: data.category,
+    //         score: data.score,
+    //         img: file_url,
+    //     }
+    //     console.log(real_data)
+    //     postApi.addPost(real_data);
+    //     navigate(-1);
+    //                    // 서버에 보내기
+    // };
+
+    // const updatePost = async () => {
+    //     const data = {
+    //         device: inputText ? inputText : commercial?.device,
+    //         contents: areaText ? areaText : commercial?.contents,
+    //         category: selected ? selected : commercial?.category,
+    //         score: rating ? rating : commercial?.score,
+    //     }
+    //     let file_url;
+    //     if (fileInput.current.files[0]) {
+    //         const file = fileInput.current.files[0];             // 복잡한 파일 담겨있음 변환 필요
+    //         const uploaded_file = await uploadBytes(
+    //             ref(storage, `images/${file.name}`),// 파일이름
+    //             file                                    //  파일
+    //         );                                          // ref로 다운로드url에 씀
+    //         file_url = await getDownloadURL(uploaded_file.ref);
+    //     }
+
+    //     const real_data = {
+    //         device: data.device,
+    //         contents: data.contents,
+    //         category: data.category,
+    //         score: data.score,
+    //         img: file_url? file_url : commercial.img,
+    //     }
+    //     console.log(real_data)
+    //     postApi.updatePost(commercial.id,real_data);                // 서버에 보내기
+    //     navigate("/");
+    // };
 
     const call = async () => {
         const data = await postApi.loadOnePost(1);
         setCommercial(data)
     }
-    console.log(commercial)
 
     React.useEffect(() => {
         if (mode === "update") call();
@@ -154,7 +193,7 @@ const Form = ({ mode }) => {
             <Input
                 placeholder="제품명을 입력해주세요."
                 width="50%"
-                value={mode === "add" ? "" : commercial?.device}
+                defaultValue={mode === "add" ? "" : commercial?.device}
                 _onChange={(e) => { setInputText(e.target.value) }}
             />
             <Select
@@ -163,17 +202,17 @@ const Form = ({ mode }) => {
             </Select>
             <Textarea
                 placeholder="내용을 입력해주세요."
-                value={mode === "add" ? "" : commercial?.contents}
+                defaultValue={mode === "add" ? "" : commercial?.contents}
                 _onChange={(e) => { setAreaText(e.target.value) }}
             />
             {mode === "add" ?
                 <CustomButton style={{ padding: "10px", width: "100%" }}
-                    _onClick={() => { addPost();  }}
+                    _onClick={() => { addClick(); }}
                 >작성하기
                 </CustomButton>
                 : <CustomButton
                     style={{ padding: "10px", width: "100%" }}
-                    _onClick={() => { updatePost(); }}
+                    _onClick={() => { updateClick(); }}
                 >수정하기
                 </CustomButton>
             }

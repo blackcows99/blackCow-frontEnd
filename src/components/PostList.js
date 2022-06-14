@@ -6,6 +6,7 @@ import axios from 'axios';
 import { async } from '@firebase/util';
 import { postApi } from '../shared/api';
 import { loadCommercial } from '../redux/modules/Commercial';
+import { loadComments } from '../redux/modules/Comment';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 

@@ -3,10 +3,11 @@ import styled from 'styled-components';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../font.css';
-
 import { useNavigate } from 'react-router-dom';
-
+import { useDispatch } from 'react-redux';
+import { loadUser } from '../redux/modules/user';
 const Header = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [member, setMemeber] = React.useState({});
   const signIn = () => {
@@ -18,6 +19,7 @@ const Header = () => {
   const signUp = () => {
     navigate('/sign_up');
   };
+<<<<<<< HEAD
 
   const getMemberInfo = () => {
     axios
@@ -28,6 +30,17 @@ const Header = () => {
       .catch((error) => {
         console.log(error);
         setMemeber({});
+=======
+  const getMemberInfo = async () =>{
+     await axios.get('/api_member')
+          .then((response)=>{
+            // setMemeber(response.data);
+            setMemeber(...response.data)
+            dispatch(loadUser(...response.data))
+          }).catch((error)=>{
+              console.log(error);
+            setMemeber({});
+>>>>>>> 7c2b8e64f229eff309c2a8b11625157a2c68874c
       });
   };
 

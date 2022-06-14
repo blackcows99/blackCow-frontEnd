@@ -1,6 +1,6 @@
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
-import { Login, Main, Detail, Update, Add, SignUp} from './pages';
+import { Login, Main, Detail, Update, Add, SignUp, Form} from './pages';
 import { Header } from './components';
 function App() {
   return (
@@ -10,8 +10,8 @@ function App() {
       <Routes>
         <Route path='/' element={<Main />} />
         <Route path='/detail/:id' element={<Detail />} />
-        <Route path='/add' element={<Add />} />
-        <Route path='/update/:id' element={<Update/>} />
+        <Route path='/add' element={<Form  mode ="add"/>} />
+        <Route path='/update/:id' element={<Form mode ="update"/>} />
         <Route path='/login' element={<Login/>} />
         <Route path='/sign_up' element={<SignUp/>} />
       </Routes>

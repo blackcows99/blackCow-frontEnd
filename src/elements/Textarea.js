@@ -4,7 +4,7 @@ const Textarea = (props) => {
         label,
         type,
         placeholder,
-        value,
+        defaultValue,
         _onChange,
         margin,
         width,
@@ -19,7 +19,7 @@ const Textarea = (props) => {
              <TextArea 
              {...styles}
                 type={type}
-                defaultValue={value}
+                defaultValue={defaultValue}
                 placeholder={placeholder}
                 onChange={_onChange}
                 style={{width}}

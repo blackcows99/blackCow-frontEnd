@@ -5,8 +5,9 @@ const Input = (props) => {
         label,
         type,
         placeholder,
-        value,
         _onChange,
+        defaultValue,
+
         margin,
         width,
     } = props;
@@ -23,11 +24,11 @@ const Input = (props) => {
             <InputBox 
             // {...styles}
                 type={type}
-                // defaultValue={value}
+                defaultValue={defaultValue}
                 placeholder={placeholder}
                 onChange={_onChange}
                 style={{width}}
-                value={value}
+                // value={value}
             ></InputBox>
     )
 }
@@ -39,7 +40,7 @@ Input.defaultProps = {
     _onChange: () => {},
     margin: false,
     width: false,
-    value:''
+    defaultValue:'',
   };
 //   `width: ${props.width};`
 const InputBox = styled.input`
