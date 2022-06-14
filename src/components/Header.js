@@ -19,28 +19,17 @@ const Header = () => {
   const signUp = () => {
     navigate('/sign_up');
   };
-<<<<<<< HEAD
-
-  const getMemberInfo = () => {
-    axios
+  const getMemberInfo = async () => {
+    await axios
       .get('/api_member')
       .then((response) => {
-        setMemeber(response.data);
+        // setMemeber(response.data);
+        setMemeber(...response.data);
+        dispatch(loadUser(...response.data));
       })
       .catch((error) => {
         console.log(error);
         setMemeber({});
-=======
-  const getMemberInfo = async () =>{
-     await axios.get('/api_member')
-          .then((response)=>{
-            // setMemeber(response.data);
-            setMemeber(...response.data)
-            dispatch(loadUser(...response.data))
-          }).catch((error)=>{
-              console.log(error);
-            setMemeber({});
->>>>>>> 7c2b8e64f229eff309c2a8b11625157a2c68874c
       });
   };
 
