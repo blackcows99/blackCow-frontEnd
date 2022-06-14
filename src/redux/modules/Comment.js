@@ -6,12 +6,11 @@ const CommentSlice = createSlice({      // = useState
     reducers:{
         loadComments: (state, action) => {
             state.push(action.payload);
-            console.log(current(state))
         },
-        loadComment: (state, action) => {
-            console.log(action.payload);
-            state.push(action.payload);
-        }
+        // loadComment: (state, action) => {
+        //     console.log(action.payload);
+        //     state.push(action.payload);
+        // }
         
 }
 })

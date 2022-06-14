@@ -2,16 +2,18 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import StarIcon from '@mui/icons-material/Star';
 import axios from 'axios';
+
 import { async } from '@firebase/util';
 import { postApi } from '../shared/api';
 import { loadCommercial } from '../redux/modules/Commercial';
 import { loadComments } from '../redux/modules/Comment';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+
 const PostList = (props) => {
   const navigate = useNavigate();
   const [star, setStar] = React.useState([0, 1, 2, 3, 4]);
-
+  const [postData, setPostData] = React.useState([]);
   const [category, setCategory] = React.useState([
     '컴퓨터',
     '노트북',
@@ -23,26 +25,32 @@ const PostList = (props) => {
   const dispatch = useDispatch();
 
   // 리덕스에 데이터 보내기
-  const posts = async () => {
-    const post_list = await postApi.loadPost();
-    const comment_list = [];
-    post_list.data.map((p,i) => {
-      comment_list.push(p.comments);
-    })
+  // const posts = async () => {
+  //   const post_list = await postApi.loadPost();
+  //   console.log(post_list.data);
 
-    dispatch(loadCommercial(post_list.data));
-    dispatch(loadComments(comment_list));
+  //   dispatch(loadCommercial(post_list.data));
+  // };
+
+  // postList 서버 데이터 가져오기
+  // console.log(postApi.loadPost()); // 프로미스 값 가져옴
+  const test = async () => {
+    const test_list = await postApi.loadPost();
+    const data = test_list.data;
+    // console.log(data);
+    return setPostData(data);
   };
 
   useEffect(() => {
-    posts();
+    test();
   }, []);
+  console.log(postData);
 
   // 리덕스 데이터 들고오기
-  const data = useSelector((state) => state.commercial);
+  // const data = useSelector((state) => state.commercial);
 
   // 탭 버튼 클릭에 따른 데이터
-  const tabContent = data.filter((x) => {
+  const tabContent = postData.filter((x) => {
     if (x.category == props.activeIndex) {
       return x.category;
     }
@@ -63,31 +71,35 @@ const PostList = (props) => {
             {list.img && (
               <Picture
                 onClick={() => {
-                  navigate(`/detail/${list.id}`,{
-                    id:list.id
+                  navigate(`/detail/${list.id}`, {
+                    id: list.id,
                   });
                 }}
                 style={{ backgroundImage: `url(${list.img})` }}
               />
             )}
 
-            <Contents>
+            <Contents key={idx}>
               <h4>{list.device}</h4>
               <p>{list.content}</p>
             </Contents>
             <Bottom style={{ marginTop: '10px' }}>
               <div
                 style={{
-                  backgroundColor: 'red',
-                  padding: '3px',
-                  borderRadius: '5px',
+                  backgroundColor: '#DDDDDD',
+                  padding: '3px 7px',
+                  borderRadius: '30px',
+                  fontSize: '15px',
+                  color: '#686868',
                 }}
               >
                 {category[list.category - 1]}
               </div>
               <div>
                 {star.map((star, idx) => {
-                  return <StarIcon key={idx} style={{ color: list.score > idx ? '#ffe596' : '#eee' }} />;
+                  return (
+                    <StarIcon key={idx} style={{ color: list.score > idx ? '#F05454' : '#eee' }} />
+                  );
                 })}
               </div>
             </Bottom>
@@ -100,7 +112,7 @@ const PostList = (props) => {
 
 const Container = styled.div`
   width: 80%;
-  margin: 20px auto;
+  margin: 30px auto;
 
   display: grid;
 
@@ -112,8 +124,11 @@ const Container = styled.div`
 `;
 
 const Post = styled.div`
-  width: 300px;
-  border: 1px solid #000000;
+  width: 330px;
+  border: 1px solid #dfdfdf;
+  border-radius: 10px;
+
+  box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.05);
 
   box-sizing: content-box;
   padding: 10px 0;
@@ -133,6 +148,15 @@ const Top = styled.div`
   p {
     margin: 10px 0;
   }
+
+  & h4 {
+    font-size: 20px;
+  }
+
+  & p {
+    font-size: 15px;
+    color: #828282;
+  }
 `;
 
 const Picture = styled.div`
@@ -140,8 +164,6 @@ const Picture = styled.div`
   height: 300px;
 
   background-color: #eee;
-
-  // background-image: url('https://firebasestorage.googleapis.com/v0/b/sparta-megazine.appspot.com/o/images%2FvJs3tlUkPSQvipVB4YeItYrnhTS2_1654739445381?alt=media&token=8a7daa41-8ace-4893-ad86-888b31fa2ed3');
 
   background-position: center;
   background-size: cover;
@@ -160,11 +182,14 @@ const Contents = styled.div`
   & h4 {
     width: 100%;
     margin: 10px 0;
+    font-size: 20px;
+    font-weight: bold;
   }
 
   & p {
     width: 100%;
     margin: 3px 0;
+    font-size: 17px;
   }
 `;
 
