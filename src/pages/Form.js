@@ -30,21 +30,22 @@ const Form = ({ mode }) => {
 
     const getData = async () => {
         let data;
+        let file_url;
         if ( fileInput.current.files[0] ) {
             const file = fileInput.current.files[0];             // 복잡한 파일 담겨있음 변환 필요
             const uploaded_file = await uploadBytes(
                 ref(storage, `images/${file.name}`),// 파일이름
                 file                                    //  파일
             );                                          // ref로 다운로드url에 씀
-            const file_url = await getDownloadURL(uploaded_file.ref);
-            data = {
-                device: inputText ? inputText : commercial?.device,
-                contents: areaText ? areaText : commercial?.contents,
-                category: selected ? selected : commercial?.category,
-                score: rating ? rating : commercial?.score,
-                img: file_url ? file_url : commercial?.img,
-                member: user[0].name,
-            }
+            file_url = await getDownloadURL(uploaded_file.ref);
+        }
+        data = {
+            device: inputText ? inputText : commercial?.device,
+            contents: areaText ? areaText : commercial?.contents,
+            category: selected ? selected : commercial?.category,
+            score: rating ? rating : commercial?.score,
+            img: file_url ? file_url : commercial?.img,
+            // member: user[0].name,
         }
         return data;
     }
@@ -53,18 +54,21 @@ const Form = ({ mode }) => {
     const addClick = () => {
         getData().then(res => {
             postApi.addPost(res)
-            dispatch(addCommercial(_data)); 
+            // dispatch(addCommercial(_data));
             navigate(-1);
         });
     }
       const updateClick = () => {
-        const data = getData();
-        console.log('updatePost 실행')
-        console.log(data)
-        // postApi.updatePost(commercial.id,data);                // 서버에 보내기
+        // let data;
+          getData().then(res=>{
+              console.log(res)
+              postApi.updatePost(commercial.id,res);
+              navigate("/");
+          });
+               // 서버에 보내기
         // dispatch(updateCommercial(real_data));  
 
-        // navigate("/");
+
     }
 
     // const addPost = async () => {

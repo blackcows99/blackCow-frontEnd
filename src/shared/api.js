@@ -11,17 +11,23 @@ const authApi = {
         RESP.LOGIN.user.push(data);
         console.log(RESP.LOGIN.user);
     },
+    authCheck: (onsuccess,onerror)=>{
+        axios
+            .get('/api_member')
+            .then(onsuccess)
+            .catch(onerror);
+    }
     
 };
 
 const postApi = {
     loadPost: async () => {
         return await axios
-            // .get('/api_posts')
-            .get('/api_post')
+            .get('/api_posts')
+            // .get('/api/post')
             .then((response) => {
                 // console.log('완료!');
-                console.log(response);
+                console.log(response.data);
                 return response;
             })
             .catch((err) => {
@@ -59,7 +65,7 @@ const postApi = {
                 alert('업데이트 완료!');
             })
             .catch((error) => {
-                alert('업데이트 에러 발생!');
+                alert(error.response.data);
             });
     },
     addComment: async (id, data) => {

@@ -29,6 +29,7 @@ const Detail = ({ data }) => {
         console.log(response);
         setContent('');
         console.log(comments)
+        call();
     }
     React.useEffect(() => {
         call();
@@ -51,7 +52,7 @@ const Detail = ({ data }) => {
                     <Image src={commercial?.img} width="50%"></Image>
                     <div style={{ padding: "10px" }}>
                         <p><strong style={{ fontSize: "1.1rem" }}>{commercial?.device}</strong></p>
-                        <p>{commercial?.comtents}</p>
+                        <p>{commercial?.contents}</p>
                     </div>
                 </ContentBox>
                 <Center>
