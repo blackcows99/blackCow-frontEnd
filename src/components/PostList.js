@@ -2,15 +2,17 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import StarIcon from '@mui/icons-material/Star';
 import axios from 'axios';
+
 import { async } from '@firebase/util';
 import { postApi } from '../shared/api';
 import { loadCommercial } from '../redux/modules/Commercial';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+
 const PostList = (props) => {
   const navigate = useNavigate();
   const [star, setStar] = React.useState([0, 1, 2, 3, 4]);
-
+  const [postData, setPostData] = React.useState([]);
   const [category, setCategory] = React.useState([
     '컴퓨터',
     '노트북',
@@ -22,22 +24,32 @@ const PostList = (props) => {
   const dispatch = useDispatch();
 
   // 리덕스에 데이터 보내기
-  const posts = async () => {
-    const post_list = await postApi.loadPost();
-    console.log(post_list.data);
+  // const posts = async () => {
+  //   const post_list = await postApi.loadPost();
+  //   console.log(post_list.data);
 
-    dispatch(loadCommercial(post_list.data));
+  //   dispatch(loadCommercial(post_list.data));
+  // };
+
+  // postList 서버 데이터 가져오기
+  // console.log(postApi.loadPost()); // 프로미스 값 가져옴
+  const test = async () => {
+    const test_list = await postApi.loadPost();
+    const data = test_list.data;
+    // console.log(data);
+    return setPostData(data);
   };
 
   useEffect(() => {
-    posts();
+    test();
   }, []);
+  console.log(postData);
 
   // 리덕스 데이터 들고오기
-  const data = useSelector((state) => state.commercial);
+  // const data = useSelector((state) => state.commercial);
 
   // 탭 버튼 클릭에 따른 데이터
-  const tabContent = data.filter((x) => {
+  const tabContent = postData.filter((x) => {
     if (x.category == props.activeIndex) {
       return x.category;
     }
@@ -66,7 +78,7 @@ const PostList = (props) => {
               />
             )}
 
-            <Contents>
+            <Contents key={idx}>
               <h4>{list.device}</h4>
               <p>{list.content}</p>
             </Contents>
@@ -84,7 +96,9 @@ const PostList = (props) => {
               </div>
               <div>
                 {star.map((star, idx) => {
-                  return <StarIcon style={{ color: list.score > idx ? '#F05454' : '#eee' }} />;
+                  return (
+                    <StarIcon key={idx} style={{ color: list.score > idx ? '#F05454' : '#eee' }} />
+                  );
                 })}
               </div>
             </Bottom>

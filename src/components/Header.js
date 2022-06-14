@@ -42,9 +42,7 @@ const Header = () => {
         BlackCow
       </h1>
       <div>
-        <p>
-          {member.name == undefined ? '' : member.name + '님, 안녕하세요!'}홍길동님, 안녕하세요!
-        </p>
+        <p>{member.name == undefined ? '' : member.name + '님, 안녕하세요!'}</p>
         <button onClick={signIn} style={{ display: member.name == undefined ? '' : 'none' }}>
           로그인
         </button>

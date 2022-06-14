@@ -14,6 +14,7 @@ const Main = () => {
     {
       tabTitle: (
         <button
+          key={0}
           className={`${activeIndex === 0 ? 'isActive' : 'isBtn'}`}
           onClick={() => tabClickHandler(0)}
         >
@@ -25,6 +26,7 @@ const Main = () => {
     {
       tabTitle: (
         <button
+          key={1}
           className={`${activeIndex === 1 ? 'isActive' : 'isBtn'}`}
           onClick={() => tabClickHandler(1)}
         >
@@ -36,6 +38,7 @@ const Main = () => {
     {
       tabTitle: (
         <button
+          key={2}
           className={`${activeIndex === 2 ? 'isActive' : 'isBtn'}`}
           onClick={() => tabClickHandler(2)}
         >
@@ -47,6 +50,7 @@ const Main = () => {
     {
       tabTitle: (
         <button
+          key={3}
           className={`${activeIndex === 3 ? 'isActive' : 'isBtn'}`}
           onClick={() => tabClickHandler(3)}
         >
@@ -58,6 +62,7 @@ const Main = () => {
     {
       tabTitle: (
         <button
+          key={4}
           className={`${activeIndex === 4 ? 'isActive' : 'isBtn'}`}
           onClick={() => tabClickHandler(4)}
         >
@@ -69,6 +74,7 @@ const Main = () => {
     {
       tabTitle: (
         <button
+          key={5}
           className={`${activeIndex === 5 ? 'isActive' : 'isBtn'}`}
           onClick={() => tabClickHandler(5)}
         >
