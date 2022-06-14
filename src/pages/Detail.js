@@ -3,8 +3,9 @@ import styled from 'styled-components';
 import { MyContainer, Image, CustomButton } from '../elements';
 import { TabContent } from '../components';
 import { BsStarFill } from 'react-icons/bs';
-import { Navigate, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { postApi } from '../shared/api';
+import { loadComment } from '../redux/modules/Comment';
 const Detail = ({ data }) => {
     const params = useParams();
     const navigate = useNavigate();
@@ -13,11 +14,11 @@ const Detail = ({ data }) => {
     const [comments, setComments] = useState([]);
     const [content,setContent] = useState('');
 
+
     const call = async () => {
         const data = await postApi.loadOnePost(id);
-        let commentdata = data.comments;
         setCommercial(data);
-        setComments(commentdata);
+        setComments(data.comments);
     }
 
     const handleComment = async () => {
@@ -27,9 +28,7 @@ const Detail = ({ data }) => {
         const response = await postApi.addComment(id, _data)
         console.log(response);
         setContent('');
-        call();
-
-
+        console.log(comments)
     }
     React.useEffect(() => {
         call();

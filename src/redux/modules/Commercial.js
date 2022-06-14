@@ -7,6 +7,7 @@ const CommercialSlice = createSlice({
     addCommercial: (state, action) => {
       const commercial = { ...action.payload };
       state.push(commercial);
+      console.log(current(state))
       // console.log(current(state))
     },
 

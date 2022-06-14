@@ -5,6 +5,7 @@ import axios from 'axios';
 import { async } from '@firebase/util';
 import { postApi } from '../shared/api';
 import { loadCommercial } from '../redux/modules/Commercial';
+import { loadComments } from '../redux/modules/Comment';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 const PostList = (props) => {
@@ -24,9 +25,13 @@ const PostList = (props) => {
   // 리덕스에 데이터 보내기
   const posts = async () => {
     const post_list = await postApi.loadPost();
-    console.log(post_list.data);
+    const comment_list = [];
+    post_list.data.map((p,i) => {
+      comment_list.push(p.comments);
+    })
 
     dispatch(loadCommercial(post_list.data));
+    dispatch(loadComments(comment_list));
   };
 
   useEffect(() => {
@@ -82,7 +87,7 @@ const PostList = (props) => {
               </div>
               <div>
                 {star.map((star, idx) => {
-                  return <StarIcon style={{ color: list.score > idx ? '#ffe596' : '#eee' }} />;
+                  return <StarIcon key={idx} style={{ color: list.score > idx ? '#ffe596' : '#eee' }} />;
                 })}
               </div>
             </Bottom>

@@ -1,19 +1,39 @@
 {
   "api_comment": [
     {
-      "id": "1",
+      "id": 1,
       "member": "member1",
       "comment": "comment1",
       "isDeleteable": true
     },
     {
-      "id": "2",
+      "id": 2,
       "member": "member2",
       "comment": "comment2",
       "isDeleteable": true
     },
+    [
+      {
+        "id": "1",
+        "member": "member1",
+        "comment": "댓글1"
+      },
+      {
+        "id": "2",
+        "member": "member1",
+        "comment": "댓글2"
+      },
+      {
+        "id": "3",
+        "member": "member3",
+        "comment": "댓글3"
+      }
+    ]
+  ],
+  "api_member": [
     {
-      "id": "7_FWvMb"
+      "name": "박승현",
+      "email": "aaa@aaa.com"
     }
   ],
   "api_post": [
@@ -72,108 +92,97 @@
       ]
     },
     {
-      "device": "ㅕㅎ",
-      "contents": "ㅗㅛ",
-      "category": "3",
-      "score": 3,
-      "img": "https://firebasestorage.googleapis.com/v0/b/week-6-blackcow.appspot.com/o/images%2Fundefined?alt=media&token=8a319881-1ee4-4c3a-b9cd-817ecf5da1fb",
-      "id": "Bd1EiFB"
-    },
-    {
-      "device": "ㅕ",
-      "contents": "ㅕ",
-      "category": "3",
-      "score": 3,
-      "img": "https://firebasestorage.googleapis.com/v0/b/week-6-blackcow.appspot.com/o/images%2Fundefined?alt=media&token=58a69807-75b6-4516-bcec-dd8217cdd5bb",
-      "id": "kTOTfZh"
-    },
-    {
-      "device": "rrrr",
-      "contents": "rrrr",
-      "category": "3",
-      "score": 3,
-      "img": "https://firebasestorage.googleapis.com/v0/b/week-6-blackcow.appspot.com/o/images%2Fundefined?alt=media&token=65a6c383-6d95-4c16-8243-f7ebc10341e8",
-      "id": "j0pXFih"
-    },
-    {
-      "device": "r",
-      "contents": "r",
+      "device": "ㅇ",
+      "contents": "ㅇ",
       "category": "4",
       "score": 3,
-      "img": "https://firebasestorage.googleapis.com/v0/b/week-6-blackcow.appspot.com/o/images%2Fundefined?alt=media&token=55e20e31-b03e-47cc-9b7a-075cdc6b7744",
-      "id": "HGCRW1I"
+      "img": "https://firebasestorage.googleapis.com/v0/b/week-6-blackcow.appspot.com/o/images%2F%EB%8B%A4%EC%9A%B4%EB%A1%9C%EB%93%9C.jpg?alt=media&token=be8d973a-2343-440e-b7c9-023c831109cb",
+      "id": "4",
+      "comments": [
+        {
+          "id": "1",
+          "member": "member4",
+          "comment": "댓글4"
+        },
+        {
+          "id": "2",
+          "member": "member5",
+          "comment": "댓글5"
+        },
+        {
+          "id": "3",
+          "member": "member6",
+          "comment": "댓글6"
+        }
+      ]
     },
     {
-      "device": "a",
-      "contents": "a",
+      "device": "ㄷㄷ",
+      "contents": "ㄷ",
+      "score": 5,
+      "img": "https://firebasestorage.googleapis.com/v0/b/week-6-blackcow.appspot.com/o/images%2F%EA%B7%B8%EB%A6%BC1.png?alt=media&token=ffcfce52-da7b-4764-be43-c03e15c3340d",
+      "id": "5",
+      "comments": [
+        {
+          "id": "1",
+          "member": "member4",
+          "comment": "댓글4"
+        },
+        {
+          "id": "2",
+          "member": "member5",
+          "comment": "댓글5"
+        },
+        {
+          "id": "3",
+          "member": "member6",
+          "comment": "댓글6"
+        }
+      ]
+    },
+    {
+      "device": "ㅇㅇ",
+      "contents": "ㅇㅇ",
       "category": "3",
-      "score": 4,
-      "img": "https://firebasestorage.googleapis.com/v0/b/week-6-blackcow.appspot.com/o/images%2Fundefined?alt=media&token=3e3623b7-6592-4b76-89cb-ba63c0610084",
-      "id": "4tGkgh9"
+      "score": 1,
+      "img": "https://firebasestorage.googleapis.com/v0/b/week-6-blackcow.appspot.com/o/images%2F%EB%8B%A4%EC%9A%B4%EB%A1%9C%EB%93%9C%20(1).jpg?alt=media&token=5b681eb6-3001-48ad-b0ec-13004326bc90",
+      "member": "박승현",
+      "id": "6",
+      "comments": [
+        {
+          "id": "1",
+          "member": "member4",
+          "comment": "댓글4"
+        },
+        {
+          "id": "2",
+          "member": "member5",
+          "comment": "댓글5"
+        },
+        {
+          "id": "3",
+          "member": "member6",
+          "comment": "댓글6"
+        }
+      ]
     },
     {
-      "device": "e",
-      "contents": "e",
-      "category": "3",
-      "score": 3,
-      "img": "https://firebasestorage.googleapis.com/v0/b/week-6-blackcow.appspot.com/o/images%2Fundefined?alt=media&token=c8a0d947-80f1-486c-82ba-1ac6a5ee8260",
-      "id": "g2789lw"
-    },
-    {
-      "device": "awe",
-      "contents": "fwae",
-      "category": "3",
-      "score": 3,
-      "img": "https://firebasestorage.googleapis.com/v0/b/week-6-blackcow.appspot.com/o/images%2Fundefined?alt=media&token=233a4d10-7968-4f26-b49d-eb1194f42176",
-      "id": "c1Hntye"
-    },
-    {
-      "device": "ee",
-      "contents": "ee",
-      "category": "4",
-      "score": 3,
-      "img": "https://firebasestorage.googleapis.com/v0/b/week-6-blackcow.appspot.com/o/images%2F%EA%B7%B8%EB%A6%BC1.png?alt=media&token=d197df6b-0320-4571-aac7-0c0f0c09b0ca",
-      "id": "n1fRrgd"
-    },
-    {
-      "device": "ee",
-      "contents": "ee",
-      "category": "4",
-      "score": 3,
-      "img": "https://firebasestorage.googleapis.com/v0/b/week-6-blackcow.appspot.com/o/images%2F%EA%B7%B8%EB%A6%BC1.png?alt=media&token=c4353123-f970-43c9-8ad0-0de3c9fee1dc",
-      "id": "S_oT1gt"
-    },
-    {
-      "device": "ee",
-      "contents": "ee",
-      "category": "4",
-      "score": 3,
-      "img": "https://firebasestorage.googleapis.com/v0/b/week-6-blackcow.appspot.com/o/images%2F%EA%B7%B8%EB%A6%BC1.png?alt=media&token=7f1f9758-f7e4-4fbe-bf06-2eb6118c1c28",
-      "id": "J4hmAoC"
-    },
-    {
-      "device": "e",
-      "contents": "e",
+      "device": "ㅎㅎ",
+      "contents": "ㅎㅎ",
       "category": "5",
-      "score": 2,
-      "img": "https://firebasestorage.googleapis.com/v0/b/week-6-blackcow.appspot.com/o/images%2F%EB%8B%A4%EC%9A%B4%EB%A1%9C%EB%93%9C%20(1).jpg?alt=media&token=d860dcf2-ff29-4fe4-b9df-95bcb36257f6",
-      "id": "GeFIdm8"
+      "score": 4,
+      "img": "https://firebasestorage.googleapis.com/v0/b/week-6-blackcow.appspot.com/o/images%2F%EA%B7%B8%EB%A6%BC4.png?alt=media&token=637c2f33-0d4a-4ac7-bd95-7a2a69ef0aa4",
+      "member": "박승현",
+      "id": "hAKoi8u"
     },
     {
-      "device": "aa",
-      "contents": "aa",
+      "device": "ㅇㅇ",
+      "contents": "ㅇㅇ",
       "category": "3",
       "score": 3,
-      "img": "https://firebasestorage.googleapis.com/v0/b/week-6-blackcow.appspot.com/o/images%2F%EA%B7%B8%EB%A6%BC1.png?alt=media&token=eeb41307-4adf-4b3d-bd25-88b3fe4126a6",
-      "id": "Nf2UjE0"
-    },
-    {
-      "device": "aa",
-      "contents": "aa",
-      "category": "3",
-      "score": 2,
-      "img": "https://firebasestorage.googleapis.com/v0/b/week-6-blackcow.appspot.com/o/images%2F%EA%B7%B8%EB%A6%BC4.png?alt=media&token=3692388f-0cea-461a-b7ca-0cba8eb24d05",
-      "id": "NsVdE9-"
+      "img": "https://firebasestorage.googleapis.com/v0/b/week-6-blackcow.appspot.com/o/images%2F%EB%8B%A4%EC%9A%B4%EB%A1%9C%EB%93%9C%20(1).jpg?alt=media&token=ee4f4ad2-7107-4993-8813-9ee078df001c",
+      "member": "박승현",
+      "id": "6-5ayy5"
     }
   ],
   "api_posts": [

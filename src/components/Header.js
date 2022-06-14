@@ -4,10 +4,15 @@ import { FaHome } from 'react-icons/fa';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { loadUser } from '../redux/modules/user';
 import axios from "axios";
 const Header = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  
   const [member,setMemeber] = React.useState({});
+  
   const signIn = () => {
     navigate('/login');
   };
@@ -17,10 +22,12 @@ const Header = () => {
   const signUp = () => {
     navigate('/sign_up');
   };
-  const getMemberInfo = () =>{
-      axios.get('/api_member')
+  const getMemberInfo = async () =>{
+     await axios.get('/api_member')
           .then((response)=>{
-            setMemeber(response.data);
+            // setMemeber(response.data);
+            setMemeber(...response.data)
+            dispatch(loadUser(...response.data))
           }).catch((error)=>{
               console.log(error);
             setMemeber({});
@@ -59,7 +66,7 @@ const Header = () => {
     <Container>
       <h1>Black Cow</h1>
       <div>
-        <p>{member.name==undefined?'':member.name+'님, 안녕하세요!'}</p>
+        <p>{member.name==undefined?"":member.name+'님, 안녕하세요!'}</p>
         <button onClick={signIn} style={{display:member.name==undefined?'':'none'}}>로그인</button>
         <button onClick={signUp} style={{display:member.name==undefined?'':'none'}}>회원가입</button>
         <button onClick={signOut} style={{display:member.name!=undefined?'':'none'}}>로그아웃</button>
