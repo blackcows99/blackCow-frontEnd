@@ -18,6 +18,7 @@ const Header = () => {
   const signUp = () => {
     navigate('/sign_up');
   };
+
   const getMemberInfo = () => {
     axios
       .get('/api_member')
@@ -29,9 +30,11 @@ const Header = () => {
         setMemeber({});
       });
   };
+
   React.useEffect(() => {
     getMemberInfo();
   }, []);
+
   return (
     <Container>
       <h1
