@@ -58,8 +58,8 @@ const PostList = (props) => {
             {list.img && (
               <Picture
                 onClick={() => {
-                  navigate(`/detail/${list.id}`,{
-                    id:list.id
+                  navigate(`/detail/${list.id}`, {
+                    id: list.id,
                   });
                 }}
                 style={{ backgroundImage: `url(${list.img})` }}
@@ -73,16 +73,18 @@ const PostList = (props) => {
             <Bottom style={{ marginTop: '10px' }}>
               <div
                 style={{
-                  backgroundColor: 'red',
-                  padding: '3px',
-                  borderRadius: '5px',
+                  backgroundColor: '#DDDDDD',
+                  padding: '3px 7px',
+                  borderRadius: '30px',
+                  fontSize: '15px',
+                  color: '#686868',
                 }}
               >
                 {category[list.category - 1]}
               </div>
               <div>
                 {star.map((star, idx) => {
-                  return <StarIcon style={{ color: list.score > idx ? '#ffe596' : '#eee' }} />;
+                  return <StarIcon style={{ color: list.score > idx ? '#F05454' : '#eee' }} />;
                 })}
               </div>
             </Bottom>
@@ -95,7 +97,7 @@ const PostList = (props) => {
 
 const Container = styled.div`
   width: 80%;
-  margin: 20px auto;
+  margin: 30px auto;
 
   display: grid;
 
@@ -107,8 +109,11 @@ const Container = styled.div`
 `;
 
 const Post = styled.div`
-  width: 300px;
-  border: 1px solid #000000;
+  width: 330px;
+  border: 1px solid #dfdfdf;
+  border-radius: 10px;
+
+  box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.05);
 
   box-sizing: content-box;
   padding: 10px 0;
@@ -128,6 +133,15 @@ const Top = styled.div`
   p {
     margin: 10px 0;
   }
+
+  & h4 {
+    font-size: 20px;
+  }
+
+  & p {
+    font-size: 15px;
+    color: #828282;
+  }
 `;
 
 const Picture = styled.div`
@@ -135,8 +149,6 @@ const Picture = styled.div`
   height: 300px;
 
   background-color: #eee;
-
-  // background-image: url('https://firebasestorage.googleapis.com/v0/b/sparta-megazine.appspot.com/o/images%2FvJs3tlUkPSQvipVB4YeItYrnhTS2_1654739445381?alt=media&token=8a7daa41-8ace-4893-ad86-888b31fa2ed3');
 
   background-position: center;
   background-size: cover;
@@ -155,11 +167,14 @@ const Contents = styled.div`
   & h4 {
     width: 100%;
     margin: 10px 0;
+    font-size: 20px;
+    font-weight: bold;
   }
 
   & p {
     width: 100%;
     margin: 3px 0;
+    font-size: 17px;
   }
 `;
 

@@ -9,7 +9,6 @@ const Main = () => {
   const navigate = useNavigate();
 
   // 탭 메뉴 구현 부분
-  // 다시 올림쓰
   const [activeIndex, setActiveIndex] = React.useState(0);
   const tabArr = [
     {
@@ -85,30 +84,8 @@ const Main = () => {
   };
 
   return (
-    // 박승현님 부분
-    // <div>
-    //   <button
-    //     onClick={() => {
-    //       navigate('/update');
-    //     }}
-    //   >
-    //     update
-    //   </button>
-    //   <button
-    //     onClick={() => {
-    //       navigate('/detail');
-    //     }}
-    //   >
-    //     detail
-    //   </button>
-    //   <WriteBtn onClick={() => { navigate('/add') }} >
-    //     <CreateIcon/>
-    //   </WriteBtn>
-    // </div>
-
-    // 오누리님 부분
     <Container>
-      <Banner>배너 이미지 들어가유~</Banner>
+      <Banner>이 세상의 모든 흑우들을 위하여</Banner>
       <TabMenu>
         {tabArr.map((section, idx) => {
           return section.tabTitle;
@@ -120,7 +97,7 @@ const Main = () => {
           navigate('/add');
         }}
       >
-        <CreateIcon />
+        <CreateIcon style={{ color: '#ffd5d5' }} />
       </WriteBtn>
     </Container>
   );
@@ -128,12 +105,26 @@ const Main = () => {
 
 const Container = styled.div`
   margin-top: 70px;
+  font-family: 'MinSans-Medium';
 `;
 
 const Banner = styled.div`
-  background-color: #beaffc;
+  font-family: 'BMDOHYEON';
+
   width: 100%;
   height: 200px;
+
+  font-size: 6vw;
+  color: rgba(255, 255, 255, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url('https://images.unsplash.com/photo-1507013324069-acfdabdca110?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1252&q=80');
+
+  background-position: center;
+  background-size: cover;
 `;
 
 const TabMenu = styled.div`
@@ -156,8 +147,9 @@ const WriteBtn = styled.div`
   width: 60px;
   height: 60px;
 
-  background-color: green;
+  background-color: #f05454;
   border-radius: 50px;
+  box-shadow: 0px 0px 10px 1px rgba(166, 49, 49, 0.5);
 
   display: flex;
   align-items: center;
