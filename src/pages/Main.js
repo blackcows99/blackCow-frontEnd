@@ -4,12 +4,25 @@ import styled from 'styled-components';
 import PostList from '../components/PostList';
 import CreateIcon from '@mui/icons-material/Create';
 import { useNavigate } from 'react-router-dom';
-
+import {authApi} from "../shared/api";
 const Main = () => {
   const navigate = useNavigate();
+  const [auth,setAuth] = React.useState(false);
 
   // 탭 메뉴 구현 부분
   const [activeIndex, setActiveIndex] = React.useState(0);
+  // const focus = useIsFocused();
+  const authCheck=()=>{
+    authApi.authCheck((res)=>{
+      setAuth(true);
+    },(error)=>{
+      setAuth(false);
+    })
+  }
+
+  React.useEffect(()=>{
+    authCheck();
+  },[])
   const tabArr = [
     {
       tabTitle: (
@@ -102,6 +115,7 @@ const Main = () => {
         onClick={() => {
           navigate('/add');
         }}
+        style={{display:auth?'':'none'}}
       >
         <CreateIcon style={{ color: '#ffd5d5' }} />
       </WriteBtn>

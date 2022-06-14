@@ -6,6 +6,7 @@ import '../font.css';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { loadUser } from '../redux/modules/user';
+import {authApi} from "../shared/api";
 const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -14,23 +15,25 @@ const Header = () => {
     navigate('/login');
   };
   const signOut = () => {
-    navigate('/login');
+    // navigate('/login');
+    axios.get('/logout')
+        .then(res=>{
+          setMemeber({});
+          navigate('/login');
+        })
   };
   const signUp = () => {
     navigate('/sign_up');
   };
   const getMemberInfo = async () => {
-    await axios
-      .get('/api_member')
-      .then((response) => {
-        // setMemeber(response.data);
-        setMemeber(...response.data);
-        dispatch(loadUser(...response.data));
-      })
-      .catch((error) => {
-        console.log(error);
-        setMemeber({});
-      });
+    authApi.authCheck((response) => {
+      setMemeber(response.data);
+      // setMemeber(...response.data);
+      // dispatch(loadUser(...response.data));
+    },(error) => {
+      console.log(error);
+      setMemeber({});
+    })
   };
 
   React.useEffect(() => {

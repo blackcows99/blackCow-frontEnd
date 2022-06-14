@@ -81,7 +81,7 @@ const PostList = (props) => {
 
             <Contents key={idx}>
               <h4>{list.device}</h4>
-              <p>{list.content}</p>
+              <p>{list.contents}</p>
             </Contents>
             <Bottom style={{ marginTop: '10px' }}>
               <div
