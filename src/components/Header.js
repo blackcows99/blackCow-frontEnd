@@ -6,6 +6,7 @@ import '../font.css';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { loadUser } from '../redux/modules/user';
+
 const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
