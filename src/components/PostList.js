@@ -21,7 +21,7 @@ const PostList = (props) => {
     '가전제품',
     '기타',
   ]);
-
+  const [eventSource,setEventSource] = React.useState(undefined);
   const dispatch = useDispatch();
 
   // 리덕스에 데이터 보내기
@@ -41,9 +41,27 @@ const PostList = (props) => {
     return setPostData(data);
   };
 
+  const getRealTimeData=()=>{
+    let source = new EventSource('http://localhost:8080/api/post/sse');
+
+    source.onerror=(error)=>{
+      console.log('error:'+error)
+    }
+    source.addEventListener('sse',(res)=>{
+      console.log(res);
+      test();
+    });
+    source.onopen=()=>{
+      console.log('sse is open');
+    }
+    setEventSource(source);
+  }
   useEffect(() => {
     test();
+    if(eventSource == undefined)
+      getRealTimeData();
   }, []);
+
 
   useEffect(() => {
     dispatch(loadCommercial());
