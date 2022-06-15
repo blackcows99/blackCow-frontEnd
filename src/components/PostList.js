@@ -44,7 +44,11 @@ const PostList = (props) => {
   useEffect(() => {
     test();
   }, []);
-  console.log(postData);
+
+  useEffect(() => {
+    dispatch(loadCommercial());
+  }, []);
+  // console.log(postData);
 
   // 리덕스 데이터 들고오기
   // const data = useSelector((state) => state.commercial);
@@ -181,15 +185,30 @@ const Contents = styled.div`
 
   & h4 {
     width: 100%;
+    height: 25px;
     margin: 10px 0;
     font-size: 20px;
     font-weight: bold;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   & p {
     width: 100%;
+    height: 50px;
+
     margin: 3px 0;
     font-size: 17px;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-word;
+
+    display: -webkit-box;
+    -webkit-line-clamp: 2; // 원하는 라인수
+    -webkit-box-orient: vertical;
   }
 `;
 

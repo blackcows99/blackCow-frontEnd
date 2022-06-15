@@ -1,39 +1,46 @@
 import React from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
+import CreateIcon from '@mui/icons-material/Create';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../font.css';
+
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { loadUser } from '../redux/modules/user';
 import { authApi } from '../shared/api';
+
 const Header = () => {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [member, setMemeber] = React.useState({});
+  const [member, setMember] = React.useState({});
+
   const signIn = () => {
     navigate('/login');
   };
+
   const signOut = () => {
     // navigate('/login');
     axios.get('/logout').then((res) => {
-      setMemeber({});
+      setMember({});
       navigate('/login');
     });
   };
+
   const signUp = () => {
     navigate('/sign_up');
   };
+
   const getMemberInfo = async () => {
     authApi.authCheck(
       (response) => {
-        setMemeber(response.data);
+        setMember(response.data);
         // setMemeber(...response.data);
         // dispatch(loadUser(...response.data));
       },
       (error) => {
         console.log(error);
-        setMemeber({});
+        setMember({});
       }
     );
   };
@@ -63,6 +70,14 @@ const Header = () => {
           로그아웃
         </button>
       </div>
+      <WriteBtn
+        onClick={() => {
+          navigate('/add');
+        }}
+        style={{ display: member.name != undefined ? '' : 'none' }}
+      >
+        <CreateIcon style={{ color: '#ffd5d5' }} />
+      </WriteBtn>
     </Container>
   );
 };
@@ -118,6 +133,25 @@ const Container = styled.div`
   & div > button:hover {
     background-color: rgba(255, 255, 255, 0.1);
   }
+`;
+
+const WriteBtn = styled.div`
+  width: 60px;
+  height: 60px;
+
+  background-color: #f05454;
+  border-radius: 50px;
+  box-shadow: 0px 0px 10px 1px rgba(166, 49, 49, 0.5);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  position: fixed;
+  right: 2em;
+  bottom: 2em;
+
+  cursor: pointer;
 `;
 
 export default Header;

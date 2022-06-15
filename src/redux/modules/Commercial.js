@@ -1,5 +1,9 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { current } from '@reduxjs/toolkit';
+import axios from 'axios';
+import { sendPasswordResetEmail } from 'firebase/auth';
+import { postApi } from '../../shared/api';
+
 const CommercialSlice = createSlice({
   name: 'commercial',
   initialState: [],
@@ -7,17 +11,19 @@ const CommercialSlice = createSlice({
     addCommercial: (state, action) => {
       const commercial = { ...action.payload };
       state.push(commercial);
-      console.log(current(state))
+      console.log(current(state));
       // console.log(current(state))
     },
 
     updateCommercial: (state, action) => {
-    //   console.log(action.payload);
+      //   console.log(action.payload);
     }, // 여기 할차례
 
+    // 오누리 작성
     loadCommercial: (state, action) => {
-      state.push(...action.payload);
-    //   console.log(current(state));
+      // state.push(...action.payload);
+      console.log(current(state));
+      console.log(action.payload);
     },
 
     // loadMegazine:  (state,action) => {
